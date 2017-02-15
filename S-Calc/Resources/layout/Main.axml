@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-</LinearLayout>
+<GridLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    p1:layout_width="match_parent"
+    p1:layout_height="match_parent"
+    p1:id="@+id/gridMainLayout"
+    p1:minWidth="25px"
+    p1:minHeight="25px">
+    <EditText
+        p1:id="@+id/editMainText"
+        p1:text="Enter sample" />
+    <Button
+        p1:text="Button"
+        p1:id="@+id/button" />
+</GridLayout>
