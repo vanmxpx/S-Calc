@@ -10,13 +10,9 @@
         android:layout_height="fill_parent"
         android:layout_weight="1">
         <EditText
-            android:inputType="none"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/InputEditText"
-            android:textColor="@android:color/black"
-            android:background="@android:color/white"
-            android:focusableInTouchMode="true" />
+            android:id="@+id/InputEditText" />
         <EditText
             android:inputType="none"
             android:layout_width="match_parent"

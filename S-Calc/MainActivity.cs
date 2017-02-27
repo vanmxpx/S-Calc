@@ -1,20 +1,9 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.OS;
 using Android.Widget;
-using Android.OS;
-using Android.Views.InputMethods;
-using Android.Graphics;
-using Android.Content;
 using Android.Views;
 using RPNlib;
-using System;
-using Android.Runtime;
-using Android.Views.Animations;
 using Android.InputMethodServices;
-using Android.Webkit;
-using Java.Lang;
-using Android.Util;
 
 namespace S_Calc
 {
@@ -39,13 +28,28 @@ namespace S_Calc
             _keyboardView.Visibility = ViewStates.Visible;
             r = new RPN_Real();
             Input = FindViewById<EditText>(Resource.Id.InputEditText);
+            Input.ShowSoftInputOnFocus = false;
+
             Output = FindViewById<EditText>(Resource.Id.OutputEditText);
-            Input.TextChanged += Input_TextChanged;          
+            Input.TextChanged += Input_TextChanged;
         }
         private void Input_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
-            Output.Text = $" = {r.ToString(input,ref error)}";
+            Output.Text = $" = {r.ToString(input, ref error)}";
         }
     }
 }
 
+////Hiding keyboard
+//public override bool DispatchTouchEvent(MotionEvent ev)
+//{
+//    if (ev.Action == MotionEventActions.Down)
+//    {
+//        SetSoftInputMode(SoftInput.StateAlwaysHidden);
+//
+//          InputKeyboardType.None;
+//        InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
+//        imm.HideSoftInputFromWindow(Window.DecorView.WindowToken, HideSoftInputFlags.NotAlways);
+//    }
+//    return base.DispatchTouchEvent(ev);
+//}
