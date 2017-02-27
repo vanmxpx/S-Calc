@@ -1,14 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:p1="http://schemas.android.com/apk/res/android"
-    p1:layout_width="match_parent"
-    p1:layout_height="match_parent"
-    p1:id="@+id/gridMainLayout"
-    p1:minWidth="25px"
-    p1:minHeight="25px">
-    <EditText
-        p1:id="@+id/editMainText"
-        p1:text="Enter sample" />
-    <Button
-        p1:text="Button"
-        p1:id="@+id/button" />
-</GridLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1">
+        <EditText
+            android:inputType="none"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/InputEditText"
+            android:textColor="@android:color/black"
+            android:background="@android:color/white"
+            android:focusableInTouchMode="true" />
+        <EditText
+            android:inputType="none"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/OutputEditText"
+            android:layout_marginTop="10dip"
+            android:background="@android:color/white"
+            android:textColor="@android:color/black"
+            android:enabled="false" />
+    </LinearLayout>
+    <android.inputmethodservice.KeyboardView
+        android:id="@+id/keyboard_view"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>
