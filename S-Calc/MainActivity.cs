@@ -7,6 +7,12 @@ using Android.Content;
 using Android.Views;
 using RPNlib;
 using System;
+using Android.Runtime;
+using Android.Views.Animations;
+using Android.InputMethodServices;
+using Android.Webkit;
+using Java.Lang;
+using Android.Util;
 
 namespace S_Calc
 {
@@ -16,34 +22,27 @@ namespace S_Calc
         RPN_Real r;
         EditText Input, Output;
         string input => Input.Text;
-
-        private InputMethodManager imm;
+        string error;
+        private Keyboard _keyBoard;
+        private KeyboardView _keyboardView;
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
+            _keyBoard = new Keyboard(this, Resource.Xml.keyboard);
+            _keyboardView = FindViewById<KeyboardView>(Resource.Id.keyboard_view);
+            _keyboardView.Keyboard = _keyBoard;
+            _keyboardView.OnKeyboardActionListener = new KeyboardListener(this);
+            _keyboardView.Visibility = ViewStates.Visible;
             r = new RPN_Real();
             Input = FindViewById<EditText>(Resource.Id.InputEditText);
             Output = FindViewById<EditText>(Resource.Id.OutputEditText);
-            Output.Text = "Hello world";
-            imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
-            Input.Click += EnterTextClick;
-            Output.Click += EnterTextClick;
-            Input.TextChanged += Input_TextChanged;
+            Input.TextChanged += Input_TextChanged;          
         }
-
         private void Input_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
-            Output.Text = $"Input SelectionStart: {Input.SelectionStart}";
-        }
-
-        private void EnterTextClick(object sender, EventArgs e)
-        {
-            //Это прячет клавиатуру, работает через мат со второго нажатия и неизвестно как
-
-            //imm.HideSoftInputFromWindow(Input.WindowToken, 0);
-            //imm.HideSoftInputFromWindow(Output.WindowToken, 0);
+            Output.Text = $" = {r.ToString(input,ref error)}";
         }
     }
 }
