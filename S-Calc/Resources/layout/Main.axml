@@ -13,6 +13,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/InputEditText"
+            android:textCursorDrawable="@xml/cursor"
+            android:backgroundTint="#ff00ff"
             android:layout_marginTop="10dip"
             android:textSize="22sp"
             android:textColor="@android:color/white" />

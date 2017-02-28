@@ -21,6 +21,7 @@ namespace S_Calc
 
         protected override void OnCreate(Bundle bundle)
         {
+            RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
             Input = FindViewById<EditText>(Resource.Id.InputEditText);

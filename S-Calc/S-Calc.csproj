@@ -87,7 +87,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Packages\MathLib\RPNlib.dll" />
-    <AndroidResource Include="Resources\drawable\UndoIcon.png" />
+    <AndroidResource Include="Resources\drawable\copyicon.png" />
+    <AndroidResource Include="Resources\drawable\pasteicon.png" />
+    <AndroidResource Include="Resources\drawable\undoicon.png" />
+    <AndroidResource Include="Resources\drawable\backspaceicon.png" />
+    <AndroidResource Include="Resources\drawable\deleteicon.png" />
+    <AndroidResource Include="Resources\xml\cursor.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
