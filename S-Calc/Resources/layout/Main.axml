@@ -12,16 +12,19 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/InputEditText" />
+            android:id="@+id/InputEditText"
+            android:layout_marginTop="10dip"
+            android:textSize="22sp"
+            android:textColor="@android:color/white" />
         <EditText
             android:inputType="none"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/OutputEditText"
             android:layout_marginTop="10dip"
-            android:background="@android:color/white"
-            android:textColor="@android:color/black"
-            android:enabled="false" />
+            android:textSize="22sp"
+            android:enabled="false"
+            android:textColor="@android:color/white" />
     </LinearLayout>
     <android.inputmethodservice.KeyboardView
         android:id="@+id/keyboard_view"
