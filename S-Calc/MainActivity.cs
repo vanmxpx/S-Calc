@@ -14,7 +14,7 @@ namespace S_Calc
         RPN_Real r;
         EditText Input, Output;
         string input => Input.Text;
-        string error;
+        string _error;
         private Keyboard _keyBoard;
         private KeyboardView _keyboardView;
         private KeyboardListener _keyboardListener;
@@ -24,6 +24,8 @@ namespace S_Calc
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
+            CreateTabs();
+
             Input = FindViewById<EditText>(Resource.Id.InputEditText);
             Input.ShowSoftInputOnFocus = false;
             Output = FindViewById<EditText>(Resource.Id.OutputEditText);
@@ -37,13 +39,40 @@ namespace S_Calc
             Input.TextChanged += _keyboardListener.OnInputTextChanged;
             Input.TextChanged += Input_TextChanged;
         }
+
         private void Input_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
-            Output.Text = $" = {r.ToString(input, ref error)}";
+            Output.Text = $" = {r.ToString(input, ref _error)}";
         }
+
         public void ShowMessage(string message)
         {
             Toast.MakeText(this, message, ToastLength.Long).Show();
+        }
+
+        private void CreateTabs()
+        {
+            TabHost tabHost = FindViewById<TabHost>(Resource.Id.tabHost);
+
+            tabHost.Setup();
+
+            TabHost.TabSpec tabSpec = tabHost.NewTabSpec("tagKeyboard");
+
+            tabSpec.SetContent(Resource.Id.linearLayout3);
+            tabSpec.SetIndicator("Keyboard");
+            tabHost.AddTab(tabSpec);
+
+            tabSpec = tabHost.NewTabSpec("tagButton");
+            tabSpec.SetContent(Resource.Id.linearLayout2);
+            tabSpec.SetIndicator("Button");
+            tabHost.AddTab(tabSpec);
+
+            tabSpec = tabHost.NewTabSpec("tagEmpty");
+            tabSpec.SetContent(Resource.Id.linearLayout4);
+            tabSpec.SetIndicator("Empty");
+            tabHost.AddTab(tabSpec);
+
+            tabHost.CurrentTab = 0;
         }
     }
 }

@@ -84,8 +84,26 @@ namespace S_Calc
 			// aapt resource value: 0x7f060002
 			public const int OutputEditText = 2131099650;
 			
+			// aapt resource value: 0x7f060008
+			public const int button2 = 2131099656;
+			
+			// aapt resource value: 0x7f060006
+			public const int keyboard_view = 2131099654;
+			
+			// aapt resource value: 0x7f060004
+			public const int linearLayout1 = 2131099652;
+			
+			// aapt resource value: 0x7f060007
+			public const int linearLayout2 = 2131099655;
+			
+			// aapt resource value: 0x7f060005
+			public const int linearLayout3 = 2131099653;
+			
+			// aapt resource value: 0x7f060009
+			public const int linearLayout4 = 2131099657;
+			
 			// aapt resource value: 0x7f060003
-			public const int keyboard_view = 2131099651;
+			public const int tabHost = 2131099651;
 			
 			static Id()
 			{

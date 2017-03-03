@@ -39,12 +39,12 @@ namespace S_Calc
                 case Keycode.Clear:
                     ClearInput();
                     return;
-                case Keycode.Copy:
-                    CopyOutput();
-                    return;
-                case Keycode.Paste:
-                    PasteToInput();
-                    return;
+                //case Keycode.Copy:
+                //    CopyOutput();
+                //    return;
+                //case Keycode.Paste:
+                //    PasteToInput();
+                //    return;
                 case Keycode.NavigatePrevious:
                     if (IsUndoKeyEnabled) { Undo(); }
                     return;
