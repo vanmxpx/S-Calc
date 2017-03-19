@@ -1,16 +1,21 @@
 ﻿using Android.App;
+using Android.Content.Res;
 using Android.OS;
 using Android.Widget;
 using Android.Views;
-using System.Collections.Generic;
 using RPNlib;
 using Android.InputMethodServices;
+using Android.Support.Design.Widget;
+using Android.Util;
+using Android.Support.V7.App;
+using Android.Support.V4.Widget;
 
 namespace S_Calc
 {
     [Activity(MainLauncher = true, Icon = "@drawable/icon")]
-    public class MainActivity : Activity
+    public class MainActivity : AppCompatActivity
     {
+
         RPN_Real r;
         EditText Input, Output;
         string input => Input.Text;
@@ -18,6 +23,9 @@ namespace S_Calc
         private Keyboard _keyBoard;
         private KeyboardView _keyboardView;
         private KeyboardListener _keyboardListener;
+        private DrawerLayout _drawerLayout;
+        private NavigationView _navigationView;
+        string TAG = "Menu";
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -25,6 +33,26 @@ namespace S_Calc
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
             CreateTabs();
+
+
+            SupportActionBar.SetDefaultDisplayHomeAsUpEnabled(true);
+            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            _drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            _navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
+            _navigationView.NavigationItemSelected += (sender, e) =>
+            {
+                e.MenuItem.SetChecked(true);
+                switch (e.MenuItem.ItemId)
+                {
+                    case Resource.Id.nav_home:
+                        Log.Error(TAG, "nav_home");
+                        break;
+                    case Resource.Id.nav_messages:
+                        Log.Error(TAG, "nav_messages");
+                        break;
+                }
+
+            };
 
             Input = FindViewById<EditText>(Resource.Id.InputEditText);
             Input.ShowSoftInputOnFocus = false;
@@ -48,6 +76,17 @@ namespace S_Calc
         public void ShowMessage(string message)
         {
             Toast.MakeText(this, message, ToastLength.Long).Show();
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Android.Resource.Id.Home:
+                    _drawerLayout.OpenDrawer(Android.Support.V4.View.GravityCompat.Start);
+                    return true;
+            }
+            return base.OnOptionsItemSelected(item);
         }
 
         private void CreateTabs()
