@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="S_Calc.S_Calc" android:versionCode="1" android:versionName="1.0">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="S_Calc.S_Calc" android:versionCode="1" android:versionName="1.0" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="16" />
-	<application android:label="S_Calc"
-               android:theme="@style/AppTheme">
-  </application>
+	<application android:label="S_Calc" android:theme="@style/AppTheme" android:icon="@drawable/Icon"></application>
 </manifest>
