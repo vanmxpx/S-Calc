@@ -45,7 +45,22 @@ namespace S_Calc
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int Icon = 2130837504;
+			public const int backspaceicon = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int copyicon = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int deleteicon = 2130837506;
+			
+			// aapt resource value: 0x7f020003
+			public const int Icon = 2130837507;
+			
+			// aapt resource value: 0x7f020004
+			public const int pasteicon = 2130837508;
+			
+			// aapt resource value: 0x7f020005
+			public const int undoicon = 2130837509;
 			
 			static Drawable()
 			{
@@ -69,8 +84,26 @@ namespace S_Calc
 			// aapt resource value: 0x7f060002
 			public const int OutputEditText = 2131099650;
 			
+			// aapt resource value: 0x7f060008
+			public const int button2 = 2131099656;
+			
+			// aapt resource value: 0x7f060006
+			public const int keyboard_view = 2131099654;
+			
+			// aapt resource value: 0x7f060004
+			public const int linearLayout1 = 2131099652;
+			
+			// aapt resource value: 0x7f060007
+			public const int linearLayout2 = 2131099655;
+			
+			// aapt resource value: 0x7f060005
+			public const int linearLayout3 = 2131099653;
+			
+			// aapt resource value: 0x7f060009
+			public const int linearLayout4 = 2131099657;
+			
 			// aapt resource value: 0x7f060003
-			public const int keyboard_view = 2131099651;
+			public const int tabHost = 2131099651;
 			
 			static Id()
 			{
@@ -121,7 +154,10 @@ namespace S_Calc
 		{
 			
 			// aapt resource value: 0x7f040000
-			public const int keyboard = 2130968576;
+			public const int cursor = 2130968576;
+			
+			// aapt resource value: 0x7f040001
+			public const int keyboard = 2130968577;
 			
 			static Xml()
 			{

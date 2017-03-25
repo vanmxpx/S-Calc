@@ -10,27 +10,73 @@
         android:layout_height="fill_parent"
         android:layout_weight="1">
         <EditText
-            android:inputType="none"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/InputEditText"
-            android:textColor="@android:color/black"
-            android:background="@android:color/white"
-            android:focusableInTouchMode="true" />
+            android:textCursorDrawable="@xml/cursor"
+            android:backgroundTint="#ff00ff"
+            android:layout_marginTop="10dip"
+            android:textSize="22sp"
+            android:textColor="@android:color/white" />
         <EditText
             android:inputType="none"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/OutputEditText"
             android:layout_marginTop="10dip"
-            android:background="@android:color/white"
-            android:textColor="@android:color/black"
-            android:enabled="false" />
+            android:textSize="22sp"
+            android:enabled="false"
+            android:textColor="@android:color/white" />
+      <TabHost
+          android:minWidth="25px"
+          android:minHeight="25px"
+          android:layout_width="wrap_content"
+          android:layout_height="500px"
+          android:id="@+id/tabHost"
+          android:layout_gravity="bottom"
+          android:layout_weight="1"
+          android:animateLayoutChanges="true"
+          android:animationCache="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/linearLayout1">
+          <TabWidget
+              android:id="@android:id/tabs"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content" />
+          <FrameLayout
+              android:id="@android:id/tabcontent"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/linearLayout3">
+              <android.inputmethodservice.KeyboardView
+                  android:id="@+id/keyboard_view"
+                  android:visibility="visible"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentBottom="true" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/linearLayout2">
+              <Button
+                  android:id="@+id/button2"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Кнопка на второй вкладке" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/linearLayout4" />
+          </FrameLayout>
+        </LinearLayout>
+      </TabHost>
     </LinearLayout>
-    <android.inputmethodservice.KeyboardView
-        android:id="@+id/keyboard_view"
-        android:visibility="visible"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" />
 </RelativeLayout>
