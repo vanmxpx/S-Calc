@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyWidth="20%p" android:horizontalGap="0px"
+    android:verticalGap="0px" android:keyHeight="7%p">
+  
+  <Row>
+    <Key android:codes="278" android:keyIcon ="@drawable/copyicon" android:keyEdgeFlags="left" />
+    <Key android:codes="279" android:keyIcon ="@drawable/pasteicon" />
+    <Key android:codes="260" android:keyIcon ="@drawable/undoicon" />
+    <Key android:codes="28" android:keyIcon ="@drawable/deleteicon" />
+    <Key android:codes="67" android:keyIcon ="@drawable/backspaceicon" android:keyEdgeFlags="right" />
+  </Row>
+
+  <Row>
+    <Key android:codes="8" android:keyLabel="q" android:keyEdgeFlags="left" />
+    <Key android:codes="9" android:keyLabel="w" />
+    <Key android:codes="10" android:keyLabel="e" />
+    <Key android:codes="157" android:keyLabel="r" />
+    <Key android:codes="156" android:keyLabel="t" android:keyEdgeFlags="right" />
+  </Row>
+
+  <Row>
+    <Key android:codes="11" android:keyLabel="a" android:keyEdgeFlags="left" />
+    <Key android:codes="12" android:keyLabel="s" />
+    <Key android:codes="13" android:keyLabel="d" />
+    <Key android:codes="155" android:keyLabel="f" />
+    <Key android:codes="76" android:keyLabel="/" android:keyEdgeFlags="right" />
+  </Row>
+
+  <Row>
+    <Key android:codes="158" android:keyLabel="." android:keyEdgeFlags="left" />
+    <Key android:codes="7" android:keyLabel="0" />
+    <Key android:codes="159" android:keyLabel="," />
+    <Key android:codes="44" android:keyLabel="^" />
+    <Key android:codes="47" android:keyLabel="√" android:keyEdgeFlags="right" />
+  </Row>
+</Keyboard>

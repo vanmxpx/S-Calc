@@ -81,7 +81,7 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\xml\keyboard.xml">
+    <AndroidResource Include="Resources\xml\keyboard_digital.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -93,6 +93,9 @@
     <AndroidResource Include="Resources\drawable\backspaceicon.png" />
     <AndroidResource Include="Resources\drawable\deleteicon.png" />
     <AndroidResource Include="Resources\xml\cursor.xml" />
+    <AndroidResource Include="Resources\xml\keyboard_values.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

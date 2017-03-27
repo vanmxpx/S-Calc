@@ -84,11 +84,11 @@ namespace S_Calc
 			// aapt resource value: 0x7f060002
 			public const int OutputEditText = 2131099650;
 			
-			// aapt resource value: 0x7f060008
-			public const int button2 = 2131099656;
-			
 			// aapt resource value: 0x7f060006
-			public const int keyboard_view = 2131099654;
+			public const int keyboard_digital_view = 2131099654;
+			
+			// aapt resource value: 0x7f060008
+			public const int keyboard_values_view = 2131099656;
 			
 			// aapt resource value: 0x7f060004
 			public const int linearLayout1 = 2131099652;
@@ -98,9 +98,6 @@ namespace S_Calc
 			
 			// aapt resource value: 0x7f060005
 			public const int linearLayout3 = 2131099653;
-			
-			// aapt resource value: 0x7f060009
-			public const int linearLayout4 = 2131099657;
 			
 			// aapt resource value: 0x7f060003
 			public const int tabHost = 2131099651;
@@ -157,7 +154,10 @@ namespace S_Calc
 			public const int cursor = 2130968576;
 			
 			// aapt resource value: 0x7f040001
-			public const int keyboard = 2130968577;
+			public const int keyboard_digital = 2130968577;
+			
+			// aapt resource value: 0x7f040002
+			public const int keyboard_values = 2130968578;
 			
 			static Xml()
 			{

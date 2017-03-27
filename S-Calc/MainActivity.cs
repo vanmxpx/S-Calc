@@ -15,26 +15,27 @@ namespace S_Calc
         EditText Input, Output;
         string input => Input.Text;
         string _error;
-        private Keyboard _keyBoard;
-        private KeyboardView _keyboardView;
+        private Keyboard _keyBoardDigital;
+        private KeyboardView _keyboardDigitalView;
+
+        private Keyboard _keyBoardValues;
+        private KeyboardView _keyboardValuesView;
+
         private KeyboardListener _keyboardListener;
+        public TabHost tabHost;
 
         protected override void OnCreate(Bundle bundle)
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
-            CreateTabs();
 
             Input = FindViewById<EditText>(Resource.Id.InputEditText);
             Input.ShowSoftInputOnFocus = false;
             Output = FindViewById<EditText>(Resource.Id.OutputEditText);
-            _keyBoard = new Keyboard(this, Resource.Xml.keyboard);
-            _keyboardView = FindViewById<KeyboardView>(Resource.Id.keyboard_view);
-            _keyboardView.Keyboard = _keyBoard;
-            _keyboardView.OnKeyboardActionListener = _keyboardListener = new KeyboardListener(this, Input, Output);
-            _keyboardView.Visibility = ViewStates.Visible;
-            _keyboardView.SetBackgroundColor(Android.Graphics.Color.Magenta);
+
+            CreateTabs();
+
             r = new RPN_Real();
             Input.TextChanged += _keyboardListener.OnInputTextChanged;
             Input.TextChanged += Input_TextChanged;
@@ -52,24 +53,32 @@ namespace S_Calc
 
         private void CreateTabs()
         {
-            TabHost tabHost = FindViewById<TabHost>(Resource.Id.tabHost);
+            tabHost = FindViewById<TabHost>(Resource.Id.tabHost);
 
             tabHost.Setup();
 
-            TabHost.TabSpec tabSpec = tabHost.NewTabSpec("tagKeyboard");
+            _keyBoardDigital = new Keyboard(this, Resource.Xml.keyboard_digital);
+            _keyboardDigitalView = FindViewById<KeyboardView>(Resource.Id.keyboard_digital_view);
+            _keyboardDigitalView.Keyboard = _keyBoardDigital;
+            _keyboardDigitalView.OnKeyboardActionListener = _keyboardListener = new KeyboardListener(this, Input, Output);
+            _keyboardDigitalView.Visibility = ViewStates.Visible;
+            _keyboardDigitalView.SetBackgroundColor(Android.Graphics.Color.Magenta);
 
+            TabHost.TabSpec tabSpec = tabHost.NewTabSpec("tagDigitalKeyboard");
             tabSpec.SetContent(Resource.Id.linearLayout3);
-            tabSpec.SetIndicator("Keyboard");
+            tabSpec.SetIndicator("Digitals");
             tabHost.AddTab(tabSpec);
 
-            tabSpec = tabHost.NewTabSpec("tagButton");
+            _keyBoardValues = new Keyboard(this, Resource.Xml.keyboard_values);
+            _keyboardValuesView = FindViewById<KeyboardView>(Resource.Id.keyboard_values_view);
+            _keyboardValuesView.Keyboard = _keyBoardValues;
+            _keyboardValuesView.OnKeyboardActionListener = _keyboardListener;
+            _keyboardValuesView.Visibility = ViewStates.Visible;
+            _keyboardValuesView.SetBackgroundColor(Android.Graphics.Color.Magenta);
+
+            tabSpec = tabHost.NewTabSpec("tagValuesKeyboard");
             tabSpec.SetContent(Resource.Id.linearLayout2);
-            tabSpec.SetIndicator("Button");
-            tabHost.AddTab(tabSpec);
-
-            tabSpec = tabHost.NewTabSpec("tagEmpty");
-            tabSpec.SetContent(Resource.Id.linearLayout4);
-            tabSpec.SetIndicator("Empty");
+            tabSpec.SetIndicator("Values");
             tabHost.AddTab(tabSpec);
 
             tabHost.CurrentTab = 0;

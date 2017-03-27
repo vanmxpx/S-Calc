@@ -120,7 +120,7 @@ namespace S_Calc
         {
             history.Add(Tuple.Create(s,input.SelectionStart));
             if (history.Count > _history_list_max_limit) { history.RemoveAt(0); }
-            IsUndoKeyEnabled = history.Count <= 1 ? false : true;
+            IsUndoKeyEnabled = history.Count > 1;
         }
         public void OnInputTextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
