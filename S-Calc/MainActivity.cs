@@ -2,7 +2,6 @@
 using Android.OS;
 using Android.Widget;
 using Android.Views;
-using System.Collections.Generic;
 using RPNlib;
 using Android.InputMethodServices;
 
@@ -65,7 +64,7 @@ namespace S_Calc
             _keyboardDigitalView.SetBackgroundColor(Android.Graphics.Color.Magenta);
 
             TabHost.TabSpec tabSpec = tabHost.NewTabSpec("tagDigitalKeyboard");
-            tabSpec.SetContent(Resource.Id.linearLayout3);
+            tabSpec.SetContent(Resource.Id.linearLayoutTab1);
             tabSpec.SetIndicator("Digitals");
             tabHost.AddTab(tabSpec);
 
@@ -77,7 +76,7 @@ namespace S_Calc
             _keyboardValuesView.SetBackgroundColor(Android.Graphics.Color.Magenta);
 
             tabSpec = tabHost.NewTabSpec("tagValuesKeyboard");
-            tabSpec.SetContent(Resource.Id.linearLayout2);
+            tabSpec.SetContent(Resource.Id.linearLayoutTab2);
             tabSpec.SetIndicator("Values");
             tabHost.AddTab(tabSpec);
 
