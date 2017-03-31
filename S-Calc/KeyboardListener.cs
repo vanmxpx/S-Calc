@@ -39,15 +39,61 @@ namespace S_Calc
                 case Keycode.Clear:
                     ClearInput();
                     return;
-                //case Keycode.Copy:
-                //    CopyOutput();
-                //    return;
-                //case Keycode.Paste:
-                //    PasteToInput();
-                //    return;
+                case Keycode.Copy:
+                    CopyOutput();
+                    return;
+                case Keycode.Paste:
+                    PasteToInput();
+                    return;
                 case Keycode.NavigatePrevious:
                     if (IsUndoKeyEnabled) { Undo(); }
                     return;
+                case (Keycode)34://golden ratio
+                    PutString("φ", 0);
+                    return;
+                case (Keycode)35://Euler-Maskeroni
+                    PutString("γ", 0);
+                    return;
+                case (Keycode)46://pi
+                    PutString("π", 0);
+                    return;
+
+                    /*
+                     * ln ~ 252
+                     * log ~ 253
+                     * lg ~ 254
+                     * exp ~ 255
+                     * sin ~ 256
+                     * cos ~ 257
+                     * tg ~ 258
+                     * ctg ~ 259
+                     **/
+
+                case (Keycode)252:
+                    PutString("ln()", 1);
+                    return;
+                case (Keycode)253:
+                    PutString("log()", 1);
+                    return;
+                case (Keycode)254:
+                    PutString("lg()", 1);
+                    return;
+                case (Keycode)255:
+                    PutString("exp()", 1);
+                    return;
+                case (Keycode)256:
+                    PutString("sin()", 1);
+                    return;
+                case (Keycode)257:
+                    PutString("cos()", 1);
+                    return;
+                case (Keycode)258:
+                    PutString("tg()", 1);
+                    return;
+                case (Keycode)259:
+                    PutString("ctg()", 1);
+                    return;
+
                 default:
                     var keyEvent = new KeyEvent(eventTime, eventTime, KeyEventActions.Down, primaryCode, 0, MetaKeyStates.NumLockOn);
                     _activity.DispatchKeyEvent(keyEvent);

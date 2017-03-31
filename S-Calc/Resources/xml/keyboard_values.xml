@@ -12,26 +12,34 @@
   </Row>
 
   <Row>
-    <Key android:codes="8" android:keyLabel="q" android:keyEdgeFlags="left" />
-    <Key android:codes="9" android:keyLabel="w" />
-    <Key android:codes="10" android:keyLabel="e" />
-    <Key android:codes="157" android:keyLabel="r" />
-    <Key android:codes="156" android:keyLabel="t" android:keyEdgeFlags="right" />
+    <Key android:codes="46" android:keyLabel="π" android:keyEdgeFlags="left" />
+    <Key android:codes="33" android:keyLabel="e" />
+    <Key android:codes="34" android:keyLabel="φ" />
+    <Key android:codes="35" android:keyLabel="γ" />
+    <Key android:codes="157" android:keyLabel="+" android:keyEdgeFlags="right" />
   </Row>
 
   <Row>
-    <Key android:codes="11" android:keyLabel="a" android:keyEdgeFlags="left" />
-    <Key android:codes="12" android:keyLabel="s" />
-    <Key android:codes="13" android:keyLabel="d" />
-    <Key android:codes="155" android:keyLabel="f" />
-    <Key android:codes="76" android:keyLabel="/" android:keyEdgeFlags="right" />
+    <Key android:codes="252" android:keyLabel="ln()" android:keyEdgeFlags="left" />
+    <Key android:codes="253" android:keyLabel="log()" />
+    <Key android:codes="254" android:keyLabel="lg()" />
+    <Key android:codes="255" android:keyLabel="exp()"/>
+    <Key android:codes="156" android:keyLabel="-" android:keyEdgeFlags="right" />
   </Row>
 
   <Row>
+    <Key android:codes="256" android:keyLabel="sin()" android:keyEdgeFlags="left" />
+    <Key android:codes="257" android:keyLabel="cos()" />
+    <Key android:codes="258" android:keyLabel="tg()" />
+    <Key android:codes="259" android:keyLabel="ctg()"  />
+    <Key android:codes="155" android:keyLabel="×" android:keyEdgeFlags="right" />
+  </Row>
+
+    <Row>
     <Key android:codes="158" android:keyLabel="." android:keyEdgeFlags="left" />
-    <Key android:codes="7" android:keyLabel="0" />
     <Key android:codes="159" android:keyLabel="," />
-    <Key android:codes="44" android:keyLabel="^" />
-    <Key android:codes="47" android:keyLabel="√" android:keyEdgeFlags="right" />
+    <Key android:codes="162" android:keyLabel="(" />
+    <Key android:codes="163" android:keyLabel=")"/>
+    <Key android:codes="76" android:keyLabel="/" android:keyEdgeFlags="right" />
   </Row>
 </Keyboard>
