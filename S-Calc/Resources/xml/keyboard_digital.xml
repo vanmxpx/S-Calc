@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
-    android:keyWidth="20%p" android:horizontalGap="0px"
-    android:verticalGap="0px" android:keyHeight="7%p">
+    android:keyWidth="35%p" android:horizontalGap="0px"
+    android:verticalGap="0px" android:keyHeight="10%p">
   
   <Row>
     <Key android:codes="278" android:keyIcon ="@drawable/copyicon" android:keyEdgeFlags="left" />

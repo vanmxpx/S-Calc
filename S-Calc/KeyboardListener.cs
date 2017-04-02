@@ -67,6 +67,15 @@ namespace S_Calc
                      * cos ~ 257
                      * tg ~ 258
                      * ctg ~ 259
+                     * sec ~ 261
+                     * cosec ~ 262
+                     * arcsin ~ 263
+                     * arccos ~ 264
+                     * arctg ~ 265
+                     * arcctg ~ 266
+                     * abs ~ 267
+                     * ! ~ 268
+                     * !! ~ 269
                      **/
 
                 case (Keycode)252:
@@ -92,6 +101,33 @@ namespace S_Calc
                     return;
                 case (Keycode)259:
                     PutString("ctg()", 1);
+                    return;
+                case (Keycode)261:
+                    PutString("sec()", 1);
+                    return;
+                case (Keycode)262:
+                    PutString("cosec()", 1);
+                    return;
+                case (Keycode)263:
+                    PutString("arcsin()", 1);
+                    return;
+                case (Keycode)264:
+                    PutString("arccos()", 1);
+                    return;
+                case (Keycode)265:
+                    PutString("arctg()", 1);
+                    return;
+                case (Keycode)266:
+                    PutString("arcctg()", 1);
+                    return;
+                case (Keycode)267:
+                    PutString("abs()", 1);
+                    return;
+                case (Keycode)268:
+                    PutString("!", 0);
+                    return;
+                case (Keycode)269:
+                    PutString("!!", 0);
                     return;
 
                 default:
