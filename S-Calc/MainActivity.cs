@@ -10,7 +10,7 @@ namespace S_Calc
     [Activity(MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
-        RPN_Real r;
+        Controller c;
         EditText Input, Output;
         string input => Input.Text;
         string _error;
@@ -35,14 +35,14 @@ namespace S_Calc
 
             CreateTabs();
 
-            r = new RPN_Real();
+            c = new Controller();
             Input.TextChanged += _keyboardListener.OnInputTextChanged;
             Input.TextChanged += Input_TextChanged;
         }
 
         private void Input_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
-            Output.Text = $" = {r.ToString(input, ref _error)}";
+            Output.Text = $" = {c.Evaluate(input, ref _error)}";
         }
 
         public void ShowMessage(string message)
