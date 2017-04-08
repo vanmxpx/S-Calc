@@ -39,15 +39,97 @@ namespace S_Calc
                 case Keycode.Clear:
                     ClearInput();
                     return;
-                //case Keycode.Copy:
-                //    CopyOutput();
-                //    return;
-                //case Keycode.Paste:
-                //    PasteToInput();
-                //    return;
+                case Keycode.Copy:
+                    CopyOutput();
+                    return;
+                case Keycode.Paste:
+                    PasteToInput();
+                    return;
                 case Keycode.NavigatePrevious:
                     if (IsUndoKeyEnabled) { Undo(); }
                     return;
+                case (Keycode)34://golden ratio
+                    PutString("φ", 0);
+                    return;
+                case (Keycode)35://Euler-Maskeroni
+                    PutString("γ", 0);
+                    return;
+                case (Keycode)46://pi
+                    PutString("π", 0);
+                    return;
+
+                    /*
+                     * ln ~ 252
+                     * log ~ 253
+                     * lg ~ 254
+                     * exp ~ 255
+                     * sin ~ 256
+                     * cos ~ 257
+                     * tg ~ 258
+                     * ctg ~ 259
+                     * sec ~ 261
+                     * cosec ~ 262
+                     * arcsin ~ 263
+                     * arccos ~ 264
+                     * arctg ~ 265
+                     * arcctg ~ 266
+                     * abs ~ 267
+                     * ! ~ 268
+                     * !! ~ 269
+                     **/
+
+                case (Keycode)252:
+                    PutString("ln()", 1);
+                    return;
+                case (Keycode)253:
+                    PutString("log()", 1);
+                    return;
+                case (Keycode)254:
+                    PutString("lg()", 1);
+                    return;
+                case (Keycode)255:
+                    PutString("exp()", 1);
+                    return;
+                case (Keycode)256:
+                    PutString("sin()", 1);
+                    return;
+                case (Keycode)257:
+                    PutString("cos()", 1);
+                    return;
+                case (Keycode)258:
+                    PutString("tg()", 1);
+                    return;
+                case (Keycode)259:
+                    PutString("ctg()", 1);
+                    return;
+                case (Keycode)261:
+                    PutString("sec()", 1);
+                    return;
+                case (Keycode)262:
+                    PutString("cosec()", 1);
+                    return;
+                case (Keycode)263:
+                    PutString("arcsin()", 1);
+                    return;
+                case (Keycode)264:
+                    PutString("arccos()", 1);
+                    return;
+                case (Keycode)265:
+                    PutString("arctg()", 1);
+                    return;
+                case (Keycode)266:
+                    PutString("arcctg()", 1);
+                    return;
+                case (Keycode)267:
+                    PutString("abs()", 1);
+                    return;
+                case (Keycode)268:
+                    PutString("!", 0);
+                    return;
+                case (Keycode)269:
+                    PutString("!!", 0);
+                    return;
+
                 default:
                     var keyEvent = new KeyEvent(eventTime, eventTime, KeyEventActions.Down, primaryCode, 0, MetaKeyStates.NumLockOn);
                     _activity.DispatchKeyEvent(keyEvent);
@@ -120,7 +202,7 @@ namespace S_Calc
         {
             history.Add(Tuple.Create(s,input.SelectionStart));
             if (history.Count > _history_list_max_limit) { history.RemoveAt(0); }
-            IsUndoKeyEnabled = history.Count <= 1 ? false : true;
+            IsUndoKeyEnabled = history.Count > 1;
         }
         public void OnInputTextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {

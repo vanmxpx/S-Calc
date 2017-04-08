@@ -121,7 +121,7 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\xml\keyboard.xml">
+    <AndroidResource Include="Resources\xml\keyboard_digital.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

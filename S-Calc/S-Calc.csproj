@@ -57,7 +57,7 @@
     <Reference Include="mscorlib" />
     <Reference Include="RPNlib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Packages\MathLib\RPNlib.dll</HintPath>
+      <HintPath>..\packages\MathLib\RPNlib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
