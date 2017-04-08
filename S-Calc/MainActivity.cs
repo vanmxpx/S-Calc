@@ -8,10 +8,12 @@ using Android.Support.Design.Widget;
 using Android.Util;
 using Android.Support.V7.App;
 using Android.Support.V4.Widget;
+using SupportToolbar = Android.Support.V7.Widget.Toolbar;
+using S_Calc.Controls;
 
 namespace S_Calc
 {
-    [Activity(MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(MainLauncher = true, Icon = "@drawable/icon", Theme = "@style/AppTheme")]
     public class MainActivity : AppCompatActivity
     {
 
@@ -19,27 +21,37 @@ namespace S_Calc
         EditText Input, Output;
         string input => Input.Text;
         string _error;
-        private Keyboard _keyBoard;
-        private KeyboardView _keyboardView;
+
+        SupportToolbar _mToolBar;
+        private KeyboardView _keyboardDigitalView;
+        private KeyboardView _keyboardValuesView;
+        private Keyboard _keyBoardDigital; 
+        private Keyboard _keyBoardValues;
         private KeyboardListener _keyboardListener;
+
+        private TabHost tabHost;
+        //Menu
         private DrawerLayout _drawerLayout;
         private NavigationView _navigationView;
+        private MainActionBarDrawerToggle _drawerToggle;
+
         string TAG = "Menu";
 
         protected override void OnCreate(Bundle bundle)
         {
-            RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(bundle);
+
             SetContentView(Resource.Layout.Main);
-            CreateTabs();
 
 
-            SupportActionBar.SetDefaultDisplayHomeAsUpEnabled(true);
-            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            // Setup Toolbar
+            _mToolBar = FindViewById<SupportToolbar>(Resource.Id.toolbar);
+
             _drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+
             _navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
             _navigationView.NavigationItemSelected += (sender, e) =>
-            {
+            {//make actions on menu item pressed
                 e.MenuItem.SetChecked(true);
                 switch (e.MenuItem.ItemId)
                 {
@@ -50,19 +62,28 @@ namespace S_Calc
                         Log.Error(TAG, "nav_messages");
                         break;
                 }
-
             };
+
+            SetSupportActionBar(_mToolBar);
+
+            _drawerToggle = new MainActionBarDrawerToggle(this, _drawerLayout,
+                Resource.String.openDrawer, Resource.String.closeDrawer);
+
+            _drawerLayout.AddDrawerListener(_drawerToggle);
+            SupportActionBar.SetHomeButtonEnabled(true);
+            SupportActionBar.SetDisplayShowTitleEnabled(true);
+            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            _drawerToggle.SyncState();
+            //
 
             Input = FindViewById<EditText>(Resource.Id.InputEditText);
             Input.ShowSoftInputOnFocus = false;
             Output = FindViewById<EditText>(Resource.Id.OutputEditText);
-            _keyBoard = new Keyboard(this, Resource.Xml.keyboard);
-            _keyboardView = FindViewById<KeyboardView>(Resource.Id.keyboard_view);
-            _keyboardView.Keyboard = _keyBoard;
-            _keyboardView.OnKeyboardActionListener = _keyboardListener = new KeyboardListener(this, Input, Output);
-            _keyboardView.Visibility = ViewStates.Visible;
-            _keyboardView.SetBackgroundColor(Android.Graphics.Color.Magenta);
+
+            CreateTabs();
+
             r = new RPN_Real();
+
             Input.TextChanged += _keyboardListener.OnInputTextChanged;
             Input.TextChanged += Input_TextChanged;
         }
@@ -79,35 +100,38 @@ namespace S_Calc
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
-            switch (item.ItemId)
-            {
-                case Android.Resource.Id.Home:
-                    _drawerLayout.OpenDrawer(Android.Support.V4.View.GravityCompat.Start);
-                    return true;
-            }
+            _drawerToggle.OnOptionsItemSelected(item);
             return base.OnOptionsItemSelected(item);
         }
 
         private void CreateTabs()
         {
-            TabHost tabHost = FindViewById<TabHost>(Resource.Id.tabHost);
+            tabHost = FindViewById<TabHost>(Resource.Id.tabHost);
 
             tabHost.Setup();
 
-            TabHost.TabSpec tabSpec = tabHost.NewTabSpec("tagKeyboard");
+            _keyBoardDigital = new Keyboard(this, Resource.Xml.keyboard_digital);
+            _keyboardDigitalView = FindViewById<KeyboardView>(Resource.Id.keyboard_digital_view);
+            _keyboardDigitalView.Keyboard = _keyBoardDigital;
+            _keyboardDigitalView.OnKeyboardActionListener = _keyboardListener = new KeyboardListener(this, Input, Output);
+            _keyboardDigitalView.Visibility = ViewStates.Visible;
+            _keyboardDigitalView.SetBackgroundColor(Android.Graphics.Color.Magenta);
 
-            tabSpec.SetContent(Resource.Id.linearLayout3);
-            tabSpec.SetIndicator("Keyboard");
+            TabHost.TabSpec tabSpec = tabHost.NewTabSpec("tagDigitalKeyboard");
+            tabSpec.SetContent(Resource.Id.linearLayoutTab1);
+            tabSpec.SetIndicator("Digitals");
             tabHost.AddTab(tabSpec);
 
-            tabSpec = tabHost.NewTabSpec("tagButton");
-            tabSpec.SetContent(Resource.Id.linearLayout2);
-            tabSpec.SetIndicator("Button");
-            tabHost.AddTab(tabSpec);
+            _keyBoardValues = new Keyboard(this, Resource.Xml.keyboard_values);
+            _keyboardValuesView = FindViewById<KeyboardView>(Resource.Id.keyboard_values_view);
+            _keyboardValuesView.Keyboard = _keyBoardValues;
+            _keyboardValuesView.OnKeyboardActionListener = _keyboardListener;
+            _keyboardValuesView.Visibility = ViewStates.Visible;
+            _keyboardValuesView.SetBackgroundColor(Android.Graphics.Color.Magenta);
 
-            tabSpec = tabHost.NewTabSpec("tagEmpty");
-            tabSpec.SetContent(Resource.Id.linearLayout4);
-            tabSpec.SetIndicator("Empty");
+            tabSpec = tabHost.NewTabSpec("tagValuesKeyboard");
+            tabSpec.SetContent(Resource.Id.linearLayoutTab2);
+            tabSpec.SetIndicator("Values");
             tabHost.AddTab(tabSpec);
 
             tabHost.CurrentTab = 0;

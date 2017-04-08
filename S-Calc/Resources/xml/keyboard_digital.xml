@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
-    android:keyWidth="20%p" android:horizontalGap="0px"
-    android:verticalGap="0px" android:keyHeight="7%p">
+    android:keyWidth="35%p" android:horizontalGap="0px"
+    android:verticalGap="0px" android:keyHeight="10%p">
 
   <Row>
-    <Key android:codes="278" android:keyIcon ="@drawable/copyicon" android:keyEdgeFlags="left" />
+    <Key android:codes="278" android:keyIcon ="@drawable/copyicon" android:height="8px" android:keyEdgeFlags="left" />
     <Key android:codes="279" android:keyIcon ="@drawable/pasteicon" />
     <Key android:codes="260" android:keyIcon ="@drawable/undoicon" />
     <Key android:codes="28" android:keyIcon ="@drawable/deleteicon" />

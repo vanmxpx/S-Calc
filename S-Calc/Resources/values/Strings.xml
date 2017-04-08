@@ -2,4 +2,6 @@
 <resources>
     <string name="Hello">Hello World, Click Me!</string>
     <string name="ApplicationName">S-Calc</string>
+    <string name="closeDrawer">S-Close</string>
+    <string name="openDrawer">S-Open</string>
 </resources>

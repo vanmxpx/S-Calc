@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyWidth="35%p" android:horizontalGap="0px"
+    android:verticalGap="0px" android:keyHeight="8%p">
+
+  <Row>
+    <Key android:codes="278" android:keyIcon ="@drawable/copyicon" android:keyEdgeFlags="left"/>
+    <Key android:codes="279" android:keyIcon ="@drawable/pasteicon" />
+    <Key android:codes="260" android:keyIcon ="@drawable/undoicon" />
+    <Key android:codes="28" android:keyIcon ="@drawable/deleteicon" />
+    <Key android:codes="67" android:keyIcon ="@drawable/backspaceicon" android:keyEdgeFlags="right" />
+  </Row>
+
+  <Row>
+    <Key android:codes="46" android:keyLabel="π" android:keyEdgeFlags="left" />
+    <Key android:codes="33" android:keyLabel="e" />
+    <Key android:codes="34" android:keyLabel="φ" />
+    <Key android:codes="35" android:keyLabel="γ" />
+    <Key android:codes="268" android:keyLabel="!" android:keyEdgeFlags="right" />
+  </Row>
+
+  <Row>
+    <Key android:codes="252" android:keyLabel="ln()" android:keyEdgeFlags="left" />
+    <Key android:codes="253" android:keyLabel="log()" />
+    <Key android:codes="254" android:keyLabel="lg()" />
+    <Key android:codes="255" android:keyLabel="exp()"/>
+    <Key android:codes="267" android:keyLabel="abs()" android:keyEdgeFlags="right" />
+  </Row>
+
+  <Row>
+    <Key android:codes="256" android:keyLabel="sin()" android:keyEdgeFlags="left" />
+    <Key android:codes="257" android:keyLabel="cos()" />
+    <Key android:codes="258" android:keyLabel="tg()" />
+    <Key android:codes="259" android:keyLabel="ctg()"  />
+    <Key android:codes="261" android:keyLabel="sec()" android:keyEdgeFlags="right" />
+  </Row>
+
+  <Row>
+    <Key android:codes="263" android:keyLabel="arcsin()" android:keyEdgeFlags="left" />
+    <Key android:codes="264" android:keyLabel="arccos()" />
+    <Key android:codes="265" android:keyLabel="arctg()" />
+    <Key android:codes="266" android:keyLabel="arcctg()"  />
+    <Key android:codes="262" android:keyLabel="cosec()" android:keyEdgeFlags="right" />
+  </Row>
+
+  <Row>
+    <Key android:codes="158" android:keyLabel="." android:keyEdgeFlags="left" />
+    <Key android:codes="159" android:keyLabel="," />
+    <Key android:codes="162" android:keyLabel="(" />
+    <Key android:codes="163" android:keyLabel=")"/>
+    <Key android:codes="269" android:keyLabel="!!" android:keyEdgeFlags="right" />
+  </Row>
+</Keyboard>

@@ -5,7 +5,7 @@ using Android.Views.Animations;
 using Android.InputMethodServices;
 using Android.Util;
 
-namespace S_Calc
+namespace S_Calc.Controls
 {
     public class CustomKeyboardView : KeyboardView
     {
