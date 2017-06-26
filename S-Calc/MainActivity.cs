@@ -2,24 +2,21 @@
 using Android.OS;
 using Android.Widget;
 using Android.Views;
-using RPNlib;
 using Android.InputMethodServices;
 using Android.Support.Design.Widget;
-using Android.Util;
 using Android.Support.V7.App;
 using Android.Support.V4.Widget;
 using SupportToolbar = Android.Support.V7.Widget.Toolbar;
 using S_Calc.Controls;
+using RPNClassLibraryCSharp;
 
 namespace S_Calc
 {
     [Activity(MainLauncher = true, Icon = "@drawable/icon", Theme = "@style/AppTheme")]
-    public class MainActivity : AppCompatActivity
+    public class MainActivity : AppCompatActivity, NavigationView.IOnNavigationItemSelectedListener
     {
-        Controller c;
         EditText Input, Output;
-        string input => Input.Text;
-        string _error;
+        private string input => Input.Text;
 
         SupportToolbar _mToolBar;
         private KeyboardView _keyboardDigitalView;
@@ -27,15 +24,12 @@ namespace S_Calc
         private Keyboard _keyBoardDigital; 
         private Keyboard _keyBoardValues;
         private KeyboardListener _keyboardListener;
-        public TabHost tabHost;
 
         private TabHost tabHost;
         //Menu
         private DrawerLayout _drawerLayout;
         private NavigationView _navigationView;
         private MainActionBarDrawerToggle _drawerToggle;
-
-        string TAG = "Menu";
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -49,21 +43,6 @@ namespace S_Calc
 
             _drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
 
-            _navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
-            _navigationView.NavigationItemSelected += (sender, e) =>
-            {//make actions on menu item pressed
-                e.MenuItem.SetChecked(true);
-                switch (e.MenuItem.ItemId)
-                {
-                    case Resource.Id.nav_home:
-                        Log.Error(TAG, "nav_home");
-                        break;
-                    case Resource.Id.nav_messages:
-                        Log.Error(TAG, "nav_messages");
-                        break;
-                }
-            };
-
             SetSupportActionBar(_mToolBar);
 
             _drawerToggle = new MainActionBarDrawerToggle(this, _drawerLayout,
@@ -76,20 +55,43 @@ namespace S_Calc
             _drawerToggle.SyncState();
             //
 
+            _navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
+            var listner = new MenuItemListener(this);
+            _navigationView.SetNavigationItemSelectedListener(this);
+            //make actions on menu item pressed
+
             Input = FindViewById<EditText>(Resource.Id.InputEditText);
             Input.ShowSoftInputOnFocus = false;
             Output = FindViewById<EditText>(Resource.Id.OutputEditText);
 
             CreateTabs();
 
-            c = new Controller();
             Input.TextChanged += _keyboardListener.OnInputTextChanged;
             Input.TextChanged += Input_TextChanged;
         }
 
+        public bool OnNavigationItemSelected(IMenuItem menuItem)
+        {
+            //make actions on menu item pressed
+            menuItem.SetChecked(true);
+            switch (menuItem.ItemId)
+            {
+                case Resource.Id.nav_home:
+                    Toast.MakeText(this, "home", ToastLength.Long).Show();
+                    return true;
+                case Resource.Id.nav_messages:
+                    Toast.MakeText(this, "nav_messages", ToastLength.Long).Show();
+                    return true;
+            }
+            return false;
+        }
+
         private void Input_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
-            Output.Text = $" = {c.Evaluate(input, ref _error)}";
+            string output;
+            bool error;
+            Controller.Evaluate(input, out output, out error);
+            Output.Text = $" = {output}";
         }
 
         public void ShowMessage(string message)

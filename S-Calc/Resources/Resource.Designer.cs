@@ -1843,14 +1843,14 @@ namespace S_Calc
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f070076
-			public const int InputEditText = 2131165302;
-			
 			// aapt resource value: 0x7f070075
-			public const int MainRelativeLayout = 2131165301;
+			public const int InputEditText = 2131165301;
 			
-			// aapt resource value: 0x7f070077
-			public const int OutputEditText = 2131165303;
+			// aapt resource value: 0x7f070074
+			public const int MainRelativeLayout = 2131165300;
+			
+			// aapt resource value: 0x7f070076
+			public const int OutputEditText = 2131165302;
 			
 			// aapt resource value: 0x7f07007e
 			public const int action0 = 2131165310;
@@ -2035,11 +2035,11 @@ namespace S_Calc
 			// aapt resource value: 0x7f070000
 			public const int item_touch_helper_previous_elevation = 2131165184;
 			
-			// aapt resource value: 0x7f07007b
-			public const int keyboard_digital_view = 2131165307;
+			// aapt resource value: 0x7f07007a
+			public const int keyboard_digital_view = 2131165306;
 			
-			// aapt resource value: 0x7f07007d
-			public const int keyboard_values_view = 2131165309;
+			// aapt resource value: 0x7f07007c
+			public const int keyboard_values_view = 2131165308;
 			
 			// aapt resource value: 0x7f07002f
 			public const int left = 2131165231;
@@ -2050,14 +2050,14 @@ namespace S_Calc
 			// aapt resource value: 0x7f070087
 			public const int line3 = 2131165319;
 			
+			// aapt resource value: 0x7f070078
+			public const int linearLayoutForTabs = 2131165304;
+			
 			// aapt resource value: 0x7f070079
-			public const int linearLayoutForTabs = 2131165305;
+			public const int linearLayoutTab1 = 2131165305;
 			
-			// aapt resource value: 0x7f07007a
-			public const int linearLayoutTab1 = 2131165306;
-			
-			// aapt resource value: 0x7f07007c
-			public const int linearLayoutTab2 = 2131165308;
+			// aapt resource value: 0x7f07007b
+			public const int linearLayoutTab2 = 2131165307;
 			
 			// aapt resource value: 0x7f07000b
 			public const int listMode = 2131165195;
@@ -2089,8 +2089,8 @@ namespace S_Calc
 			// aapt resource value: 0x7f07008c
 			public const int nav_messages = 2131165324;
 			
-			// aapt resource value: 0x7f070074
-			public const int nav_view = 2131165300;
+			// aapt resource value: 0x7f07007d
+			public const int nav_view = 2131165309;
 			
 			// aapt resource value: 0x7f07006d
 			public const int navigation_header_container = 2131165293;
@@ -2221,8 +2221,8 @@ namespace S_Calc
 			// aapt resource value: 0x7f070065
 			public const int submit_area = 2131165285;
 			
-			// aapt resource value: 0x7f070078
-			public const int tabHost = 2131165304;
+			// aapt resource value: 0x7f070077
+			public const int tabHost = 2131165303;
 			
 			// aapt resource value: 0x7f07000d
 			public const int tabMode = 2131165197;

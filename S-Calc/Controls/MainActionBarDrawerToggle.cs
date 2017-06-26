@@ -10,6 +10,7 @@ namespace S_Calc.Controls
         private Activity _hostActivity;
         private int _openedResource;
         private int _closedResource;
+
         public MainActionBarDrawerToggle(Activity host, DrawerLayout drawerLayout, int openedResource, int closedResource) 
             : base(host, drawerLayout, openedResource, closedResource)
         {
@@ -27,6 +28,7 @@ namespace S_Calc.Controls
         {
             base.OnDrawerClosed(drawerView);
         }
+
         public override void OnDrawerSlide(View drawerView, float slideOffset)
         {
             base.OnDrawerSlide(drawerView, slideOffset);

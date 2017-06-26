@@ -55,9 +55,8 @@
     <Reference Include="Mono.Android" />
     <Reference Include="Mono.Android.Export" />
     <Reference Include="mscorlib" />
-    <Reference Include="RPNlib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MathLib\RPNlib.dll</HintPath>
+    <Reference Include="RPNClassLibraryCSharp">
+      <HintPath>..\packages\MathLib\RPNClassLibraryCSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -91,6 +90,7 @@
   <ItemGroup>
     <Compile Include="Controls\CustomKeyboardView.cs" />
     <Compile Include="Controls\MainActionBarDrawerToggle.cs" />
+    <Compile Include="Controls\MenuItemListener.cs" />
     <Compile Include="KeyboardListener.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -131,7 +131,6 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Packages\MathLib\RPNlib.dll" />
     <AndroidResource Include="Resources\drawable\copyicon.png" />
     <AndroidResource Include="Resources\drawable\pasteicon.png" />
     <AndroidResource Include="Resources\drawable\undoicon.png" />
@@ -148,6 +147,7 @@
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
      Other similar extension points exist, see Microsoft.Common.targets.
