@@ -90,9 +90,10 @@
   <ItemGroup>
     <Compile Include="Controls\CustomKeyboardView.cs" />
     <Compile Include="Controls\MainActionBarDrawerToggle.cs" />
-    <Compile Include="Controls\MenuItemListener.cs" />
     <Compile Include="KeyboardListener.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Resources\fragments\CalcFragment.cs" />
+    <Compile Include="Resources\fragments\InfoFragment.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -100,10 +101,16 @@
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
-    <AndroidResource Include="Resources\layout\Drawer_header.axml">
+    <AndroidResource Include="Resources\menu\drawer_header.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\menu\nav_menu.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Info.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Calc.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
