@@ -27,13 +27,10 @@ namespace S_Calc.Resources.fragments
         private Keyboard _keyBoardDigital;
         private Keyboard _keyBoardValues;
         private KeyboardListener _keyboardListener;
-        private TabHost tabHost;
-        private MainActivity mainActivity;
+        private MainActivity _mainActivity;
 
-        public CalcFragment(MainActivity mainActivity)
-        {
-            this.mainActivity = mainActivity;
-        }
+        private TabHost tabHost;
+        private FloatingActionButton fab;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -46,24 +43,53 @@ namespace S_Calc.Resources.fragments
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
             _view = inflater.Inflate(Resource.Layout.Calc, container, false);
 
+            this._mainActivity = MainActivity.Instance;
+
             Input = _view.FindViewById<EditText>(Resource.Id.InputEditText);
             Input.ShowSoftInputOnFocus = false;
 
             Output = _view.FindViewById<EditText>(Resource.Id.OutputEditText);
+            Output.RequestFocus();
             CreateTabs();
 
             Input.TextChanged += _keyboardListener.OnInputTextChanged;
             Input.TextChanged += Input_TextChanged;
             Input.RequestFocus();
+
+            fab = _view.FindViewById<FloatingActionButton>(Resource.Id.fab_equals);
+
+            fab.Click += (o, e) =>
+            {
+                if (lastRes)
+                {
+                    Input.Text = Output.Text.Replace(" = ", string.Empty);
+                    Input.SetSelection(Input.Text.Length);
+                }
+            };
             return _view;
         }
-
+        bool lastRes;
         private void Input_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
+            fab.Alpha = input.Length > 22 ? 0.5f : 1;
             string output;
-            bool error;
-            Controller.Evaluate(input, out output, out error);
-            Output.Text = $" = {output}";
+            bool succsess;
+            Controller.Evaluate(input, out output, out succsess);
+
+            if (!succsess)
+            {
+                if (lastRes)
+                    Snackbar.Make(_view, output, Snackbar.LengthLong)
+                        .SetAction("Undo", v =>
+                        {
+                            _keyboardListener.Undo();
+                        })
+                        .Show();
+                Output.Text = " = ------";
+            }
+            else
+                Output.Text = $" = {output}";
+            lastRes = succsess;
         }
 
         private void CreateTabs()
@@ -72,10 +98,10 @@ namespace S_Calc.Resources.fragments
 
             tabHost.Setup();
 
-            _keyBoardDigital = new Keyboard(mainActivity, Resource.Xml.keyboard_digital);
+            _keyBoardDigital = new Keyboard(_mainActivity, Resource.Xml.keyboard_digital);
             _keyboardDigitalView = _view.FindViewById<KeyboardView>(Resource.Id.keyboard_digital_view);
             _keyboardDigitalView.Keyboard = _keyBoardDigital;
-            _keyboardDigitalView.OnKeyboardActionListener = _keyboardListener = new KeyboardListener(mainActivity, Input, Output);
+            _keyboardDigitalView.OnKeyboardActionListener = _keyboardListener = new KeyboardListener(_mainActivity, Input, Output);
             _keyboardDigitalView.Visibility = ViewStates.Visible;
             _keyboardDigitalView.SetBackgroundColor(Android.Graphics.Color.Magenta);
 
@@ -84,7 +110,7 @@ namespace S_Calc.Resources.fragments
             tabSpec.SetIndicator("Digitals");
             tabHost.AddTab(tabSpec);
 
-            _keyBoardValues = new Keyboard(mainActivity, Resource.Xml.keyboard_values);
+            _keyBoardValues = new Keyboard(_mainActivity, Resource.Xml.keyboard_values);
             _keyboardValuesView = _view.FindViewById<KeyboardView>(Resource.Id.keyboard_values_view);
             _keyboardValuesView.Keyboard = _keyBoardValues;
             _keyboardValuesView.OnKeyboardActionListener = _keyboardListener;

@@ -1,75 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/MainRelativeLayout"
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-  <EditText
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/InputEditText"
-      android:textCursorDrawable="@xml/cursor"
-      android:backgroundTint="#ff00ff"
-      android:layout_marginTop="10dip"
-      android:textSize="22sp"
-      android:textColor="@android:color/black" />
-  <EditText
-      android:inputType="none"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/OutputEditText"
-      android:layout_marginTop="10dip"
-      android:textSize="22sp"
-      android:enabled="false"
-      android:textColor="#1C1C1C"
-      android:layout_below="@id/InputEditText" />
-  <TabHost
-      android:minWidth="25px"
-      android:minHeight="25px"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/tabHost"
-      android:animateLayoutChanges="true"
-      android:animationCache="true"
-      android:layout_alignParentBottom="true">
-    <LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/MainRelativeLayout"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/linearLayoutForTabs"
-        android:animateLayoutChanges="true">
-      <TabWidget
-          android:id="@android:id/tabs"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content" />
-      <FrameLayout
-          android:id="@android:id/tabcontent"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content">
-        <!--Tabs Views-->
+        android:id="@+id/InputEditText"
+        android:textCursorDrawable="@xml/cursor"
+        android:backgroundTint="#ff00ff"
+        android:layout_marginTop="10dip"
+        android:textSize="22sp"
+        android:textColor="@color/button_material_dark" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_equals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@id/InputEditText"
+        android:layout_margin="24dp"
+        android:src="@drawable/ic_rotate_90_degrees_ccw_black_24dp"
+        android:layout_alignParentRight="true" />
+    <EditText
+        android:inputType="none"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/OutputEditText"
+        android:layout_marginTop="10dip"
+        android:textSize="22sp"
+        android:enabled="false"
+        android:textColor="#1C1C1C"
+        android:layout_below="@id/InputEditText" />
+    <TabHost
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tabHost"
+        android:animateLayoutChanges="true"
+        android:animationCache="true"
+        android:layout_alignParentBottom="true">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/linearLayoutTab1">
-          <android.inputmethodservice.KeyboardView
-              android:id="@+id/keyboard_digital_view"
-              android:visibility="visible"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_alignParentBottom="true" />
+            android:orientation="vertical"
+            android:id="@+id/linearLayoutForTabs"
+            android:animateLayoutChanges="true">
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <!--Tabs Views-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/linearLayoutTab1">
+                    <android.inputmethodservice.KeyboardView
+                        android:id="@+id/keyboard_digital_view"
+                        android:visibility="visible"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/linearLayoutTab2">
+                    <android.inputmethodservice.KeyboardView
+                        android:id="@+id/keyboard_values_view"
+                        android:visibility="visible"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true" />
+                </LinearLayout>
+            </FrameLayout>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/linearLayoutTab2">
-          <android.inputmethodservice.KeyboardView
-              android:id="@+id/keyboard_values_view"
-              android:visibility="visible"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_alignParentBottom="true" />
-        </LinearLayout>
-      </FrameLayout>
-    </LinearLayout>
-  </TabHost>
+    </TabHost>
 </RelativeLayout>

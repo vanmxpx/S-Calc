@@ -180,7 +180,7 @@ namespace S_Calc
             }
             OnRelease(Keycode.Unknown);
         }
-        private void Undo()
+        public void Undo()
         {
             try
             {

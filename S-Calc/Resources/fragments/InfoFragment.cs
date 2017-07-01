@@ -26,7 +26,7 @@ namespace S_Calc.Resources.fragments
         {
             // Use this to return your custom view for this Fragment
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
-            _view = inflater.Inflate(Resource.Layout.Info, container, false);
+            View _view = inflater.Inflate(Resource.Layout.Info, container, false);
             return _view;
         }
     }

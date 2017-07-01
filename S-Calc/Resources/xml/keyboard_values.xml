@@ -4,11 +4,11 @@
     android:verticalGap="0px" android:keyHeight="8%p">
 
   <Row>
-    <Key android:codes="278" android:keyIcon ="@drawable/copyicon" android:keyEdgeFlags="left"/>
-    <Key android:codes="279" android:keyIcon ="@drawable/pasteicon" />
-    <Key android:codes="260" android:keyIcon ="@drawable/undoicon" />
-    <Key android:codes="28" android:keyIcon ="@drawable/deleteicon" />
-    <Key android:codes="67" android:keyIcon ="@drawable/backspaceicon" android:keyEdgeFlags="right" />
+    <Key android:codes="278" android:keyIcon ="@drawable/ic_content_copy_white_24dp" android:keyEdgeFlags="left"/>
+    <Key android:codes="279" android:keyIcon ="@drawable/ic_content_paste_white_24dp" />
+    <Key android:codes="260" android:keyIcon ="@drawable/ic_undo_white_24dp" />
+    <Key android:codes="28" android:keyIcon ="@drawable/ic_delete_white_24dp" />
+    <Key android:codes="67" android:keyIcon ="@drawable/ic_backspace_white_24dp" android:keyEdgeFlags="right" />
   </Row>
 
   <Row>

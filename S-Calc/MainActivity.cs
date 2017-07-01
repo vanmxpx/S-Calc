@@ -1,95 +1,98 @@
-﻿using Android.App;
-using Android.Content;
-using Android.Hardware.Input;
+﻿using System.Collections.Generic;
+using Android.App;
+using Android.Content.PM;
 using Android.OS;
 using Android.Widget;
 using Android.Views;
-using Android.InputMethodServices;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Support.V4.Widget;
-using Android.Views.InputMethods;
 using SupportToolbar = Android.Support.V7.Widget.Toolbar;
+using SupportFragment = Android.Support.V4.App.Fragment;
 using S_Calc.Controls;
-using RPNClassLibraryCSharp;
 using S_Calc.Resources.fragments;
 
 namespace S_Calc
 {
-    [Activity(MainLauncher = true, Icon = "@drawable/icon", Theme = "@style/AppTheme")]
-    public class MainActivity : AppCompatActivity
-    {
-        //EditText Input, Output;
-        //private string input => Input.Text;
+    [Activity(MainLauncher = true, Icon = "@drawable/icon", Theme = "@style/AppTheme", WindowSoftInputMode = SoftInput.StateAlwaysHidden)]
 
-        SupportToolbar _mToolBar;
-        //private KeyboardView _keyboardDigitalView;
-        //private KeyboardView _keyboardValuesView;
-        //private Keyboard _keyBoardDigital; 
-        //private Keyboard _keyBoardValues;
-        //private KeyboardListener _keyboardListener;
-        //private TabHost tabHost;
-        //Menu
+public class MainActivity : AppCompatActivity
+    {
+
+        //Menu        
+        private SupportToolbar _mToolBar;
         private DrawerLayout _drawerLayout;
-        private NavigationView _navigationView;
         private MainActionBarDrawerToggle _drawerToggle;
+        private NavigationView _navigationView;
+
+        //Fragments
         private CalcFragment _calcFragment;
         private InfoFragment _infoFragment;
+        private SupportFragment _currentFragment;
+        private Stack<SupportFragment> _fragmentsStack;
+
+        public static MainActivity Instance { get; private set; }
 
         protected override void OnCreate(Bundle bundle)
         {
+            Instance = this;
             base.OnCreate(bundle);
 
             SetContentView(Resource.Layout.Main);
 
+            //Setup Fragments
+            _fragmentsStack = new Stack<SupportFragment>();
+            var trans = SupportFragmentManager.BeginTransaction();
+            if (SupportFragmentManager.FindFragmentByTag("Calc") != null)
+            {
+                _calcFragment = SupportFragmentManager.FindFragmentByTag("Calc") as CalcFragment;
+                _infoFragment = SupportFragmentManager.FindFragmentByTag("About") as InfoFragment;
+                trans.Hide(_infoFragment);
+            }
+            else
+            {
+                _infoFragment = new InfoFragment();
+                trans.Add(Resource.Id.fragment_container, _infoFragment, "About");
+                trans.Hide(_infoFragment);
+                _calcFragment = new CalcFragment();
+                trans.Add(Resource.Id.fragment_container, _calcFragment, "Calc");
+            }
+            trans.Commit();
+            _currentFragment = _calcFragment;
+            _fragmentsStack.Push(_currentFragment);
 
             // Setup Toolbar
             _mToolBar = FindViewById<SupportToolbar>(Resource.Id.toolbar);
             SetSupportActionBar(_mToolBar);
-
-            _calcFragment = new CalcFragment(this);
-            _infoFragment = new InfoFragment();
-            var trans = SupportFragmentManager.BeginTransaction();
-            trans.Add(Resource.Id.fragment_container, _calcFragment, "About");
-            trans.Hide(_infoFragment);
-            trans.Add(Resource.Id.fragment_container, _infoFragment, "Calc");
-            trans.Commit();
-
+            //SupportActionBar.SetHomeButtonEnabled(true);
+            SupportActionBar.SetDisplayShowTitleEnabled(true);
+            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            //Setup Drawer
             _drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
             _drawerToggle = new MainActionBarDrawerToggle(this, _drawerLayout,
                 Resource.String.openDrawer, Resource.String.closeDrawer);
-
             _drawerLayout.AddDrawerListener(_drawerToggle);
-            SupportActionBar.SetHomeButtonEnabled(true);
-            SupportActionBar.SetDisplayShowTitleEnabled(true);
-            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
             _drawerToggle.SyncState();
 
             _navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
             _navigationView.NavigationItemSelected += OnNavigationItemSelected;
-            //make actions on menu item pressed
 
-            //Input = FindViewById<EditText>(Resource.Id.InputEditText);
-            //Input.ShowSoftInputOnFocus = false;
-
-            //InputMethodManager inputManager = (InputMethodManager)this.GetSystemService(Context.InputMethodService);
-            //inputManager.HideSoftInputFromWindow(FindViewById<NavigationView>(Resource.Id.main_layout).WindowToken, HideSoftInputFlags.None );//this.CurrentFocus
-
-            //Output = FindViewById<EditText>(Resource.Id.OutputEditText);
-            //CreateTabs();
-
-            //Input.TextChanged += _keyboardListener.OnInputTextChanged;
-            //Input.TextChanged += Input_TextChanged;
-            //Input.RequestFocus();
         }
 
-        //private void Input_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
-        //{
-        //    string output;
-        //    bool error;
-        //    Controller.Evaluate(input, out output, out error);
-        //    Output.Text = $" = {output}";
-        //}
+        private void ShowFragment(SupportFragment fragment)
+        {
+            if (fragment.IsVisible) return;
+            //TODO: Be added
+            //trans.SetCustomAnimations();
+            var trans = SupportFragmentManager.BeginTransaction();
+            trans.Hide(_currentFragment);
+            trans.Show(fragment);
+            trans.AddToBackStack(null);
+            trans.Commit();
+
+            _fragmentsStack.Push(_currentFragment);
+            _currentFragment = fragment;
+        }
 
         public void ShowMessage(string message)
         {
@@ -99,65 +102,48 @@ namespace S_Calc
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             _drawerToggle.OnOptionsItemSelected(item);
+            int id = item.ItemId;
+            if (id == Resource.Id.home)
+            {
+                if (SupportFragmentManager.BackStackEntryCount != 0)
+                {
+                    SupportFragmentManager.PopBackStack();
+                    _currentFragment = _fragmentsStack.Pop();
+                }
+                return true;
+            }
             return base.OnOptionsItemSelected(item);
         }
 
         public void OnNavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
         {
             //make actions on menu item pressed
-            e.MenuItem.SetChecked(true);
             switch (e.MenuItem.ItemId)
             {
-                case Resource.Id.nav_home:
-                    Toast.MakeText(this, "home", ToastLength.Long).Show();
-                    break;
-                case Resource.Id.nav_messages:
-                    Toast.MakeText(this, "nav_messages", ToastLength.Long).Show();
+                case Resource.Id.nav_calc:
+                    ShowFragment(_calcFragment);
                     break;
                 case Resource.Id.nav_about:
-                    var trans = SupportFragmentManager.BeginTransaction();
-                    trans.Show(_infoFragment);
-                    trans.Commit();
+                    ShowFragment(_infoFragment);
                     break;
                 case Resource.Id.nav_exit:
                     Finish();
                     break;
             }
-            e.MenuItem.SetChecked(false);
             _drawerLayout.CloseDrawers();
         }
 
-        //private void CreateTabs()
-        //{
-        //    tabHost = FindViewById<TabHost>(Resource.Id.tabHost);
-
-        //    tabHost.Setup();
-
-        //    _keyBoardDigital = new Keyboard(this, Resource.Xml.keyboard_digital);
-        //    _keyboardDigitalView = FindViewById<KeyboardView>(Resource.Id.keyboard_digital_view);
-        //    _keyboardDigitalView.Keyboard = _keyBoardDigital;
-        //    _keyboardDigitalView.OnKeyboardActionListener = _keyboardListener = new KeyboardListener(this, Input, Output);
-        //    _keyboardDigitalView.Visibility = ViewStates.Visible;
-        //    _keyboardDigitalView.SetBackgroundColor(Android.Graphics.Color.Magenta);
-
-        //    TabHost.TabSpec tabSpec = tabHost.NewTabSpec("tagDigitalKeyboard");
-        //    tabSpec.SetContent(Resource.Id.linearLayoutTab1);
-        //    tabSpec.SetIndicator("Digitals");
-        //    tabHost.AddTab(tabSpec);
-
-        //    _keyBoardValues = new Keyboard(this, Resource.Xml.keyboard_values);
-        //    _keyboardValuesView = FindViewById<KeyboardView>(Resource.Id.keyboard_values_view);
-        //    _keyboardValuesView.Keyboard = _keyBoardValues;
-        //    _keyboardValuesView.OnKeyboardActionListener = _keyboardListener;
-        //    _keyboardValuesView.Visibility = ViewStates.Visible;
-        //    _keyboardValuesView.SetBackgroundColor(Android.Graphics.Color.Magenta);
-
-        //    tabSpec = tabHost.NewTabSpec("tagValuesKeyboard");
-        //    tabSpec.SetContent(Resource.Id.linearLayoutTab2);
-        //    tabSpec.SetIndicator("Values");
-        //    tabHost.AddTab(tabSpec);
-
-        //    tabHost.CurrentTab = 0;
-        //}
+        public override void OnBackPressed()
+        {
+            if (SupportFragmentManager.BackStackEntryCount != 0)
+            {
+                SupportFragmentManager.PopBackStack();
+                _currentFragment = _fragmentsStack.Pop();
+            }
+            else
+            {
+                base.OnBackPressed();
+            }
+        }
     }
 }

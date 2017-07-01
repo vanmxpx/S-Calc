@@ -2,6 +2,7 @@
 <resources>
   <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
     <item name="colorPrimary">#F5F5F5</item>
+    <!--<item name="colorAccent">#FF4081</item>-->
     <item name="drawerArrowStyle">@style/MainArrowStyle</item>
   </style>
   <style name="MainArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
