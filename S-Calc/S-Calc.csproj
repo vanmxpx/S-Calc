@@ -55,9 +55,8 @@
     <Reference Include="Mono.Android" />
     <Reference Include="Mono.Android.Export" />
     <Reference Include="mscorlib" />
-    <Reference Include="RPNClassLibraryCSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MathLib\RPNClassLibraryCSharp.dll</HintPath>
+    <Reference Include="RPNClassLibraryCSharp">
+      <HintPath>..\packages\Math\RPNClassLibraryCSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
