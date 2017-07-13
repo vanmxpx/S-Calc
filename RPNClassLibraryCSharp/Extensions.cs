@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Globalization;
+using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Globalization;
-using System.Runtime.CompilerServices;
 
 namespace RPNClassLibraryCSharp
 {
@@ -21,15 +21,41 @@ namespace RPNClassLibraryCSharp
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNumber(this string s)
         {
-            switch (s)
+            if (ObjectsStorage.AllConstantNames.Contains(s))
             {
-                case "pi":
-                case "e":
-                case "gamma": //постоянная Эйлера-Маскерони
-                case "phi": return true; //золотое сечение
-                default:
-                    return double.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out double tmpResult);
+                return true;
+            }
+            else
+            {
+                return double.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out double tmpResult);
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="seq"></param>
+        /// <param name="element"></param>
+        /// <returns></returns>
+        public static int FirstIndexOf<T>(this IList<T> seq, T element) where T : IEquatable<T>
+        {
+            int i = 0;
+            foreach (var e in seq)
+            {
+                if (e.Equals(element)) { return i; }
+                i++;
+            }
+            return -1;
+        }
+
+        public static void AddAllKeysToHashSet<T, TValue>(this HashSet<T> collection, IDictionary<T, TValue> dictionary)
+        {
+            foreach (var e in dictionary.Keys)
+            {
+                collection.Add(e);
+            }
+        }
+
     }
 }
