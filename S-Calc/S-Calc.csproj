@@ -90,12 +90,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\CustomKeyboardView.cs" />
-    <Compile Include="Controls\MainActionBarDrawerToggle.cs" />
-    <Compile Include="KeyboardListener.cs" />
+    <Compile Include="Common\Controls\CustomKeyboard\CustomKeyboard.cs" />
+    <Compile Include="Common\Controls\CustomKeyboard\CustomKeyboardView.cs" />
+    <Compile Include="Common\Controls\MainActionBarDrawerToggle.cs" />
+    <Compile Include="Common\Controls\CustomKeyboard\KeyboardListener.cs" />
+    <Compile Include="Kernel.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="Resources\fragments\CalcFragment.cs" />
-    <Compile Include="Resources\fragments\InfoFragment.cs" />
+    <Compile Include="Common\fragments\CalcFragment.cs" />
+    <Compile Include="Common\fragments\InfoFragment.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -7,10 +7,10 @@ using Android.Views;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Support.V4.Widget;
+using S_Calc.Common.Controls;
+using S_Calc.Common.fragments;
 using SupportToolbar = Android.Support.V7.Widget.Toolbar;
 using SupportFragment = Android.Support.V4.App.Fragment;
-using S_Calc.Controls;
-using S_Calc.Resources.fragments;
 
 namespace S_Calc
 {
@@ -99,6 +99,7 @@ public class MainActivity : AppCompatActivity
             Toast.MakeText(this, message, ToastLength.Long).Show();
         }
 
+        //TODO: Implement back arrow
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             _drawerToggle.OnOptionsItemSelected(item);
@@ -133,9 +134,12 @@ public class MainActivity : AppCompatActivity
             _drawerLayout.CloseDrawers();
         }
 
+        //TODO: only 1 instance of fragment
         public override void OnBackPressed()
         {
-            if (SupportFragmentManager.BackStackEntryCount != 0)
+            if (Kernel.Keyboard.Visible)
+                Kernel.Keyboard.HideCustomKeyboard();
+            else if (SupportFragmentManager.BackStackEntryCount != 0)
             {
                 SupportFragmentManager.PopBackStack();
                 _currentFragment = _fragmentsStack.Pop();

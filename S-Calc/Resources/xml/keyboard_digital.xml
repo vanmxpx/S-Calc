@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
-    android:keyWidth="35%p" android:horizontalGap="0px"
-    android:verticalGap="0px" android:keyHeight="10%p">
+    android:keyWidth="35%p" 
+    android:horizontalGap="1px"
+    android:verticalGap="1px" 
+    android:keyHeight="12%p">
 
   <Row>
     <Key android:codes="157" android:keyLabel="+" android:keyEdgeFlags="left" />
@@ -9,7 +11,7 @@
     <Key android:codes="8" android:keyLabel="1" />
     <Key android:codes="9" android:keyLabel="2" />
     <Key android:codes="10" android:keyLabel="3" />
-    <Key android:codes="67" android:keyIcon ="@drawable/ic_backspace_white_24dp" android:keyEdgeFlags="right" />
+    <Key android:codes="67" android:keyIcon ="@drawable/ic_backspace_white_24dp" android:isRepeatable="true" android:keyEdgeFlags="right" />
   </Row>
 
   <Row>
@@ -27,7 +29,7 @@
     <Key android:codes="14" android:keyLabel="7" />
     <Key android:codes="15" android:keyLabel="8" />
     <Key android:codes="16" android:keyLabel="9" />
-    <Key android:codes="260" android:keyIcon ="@drawable/ic_undo_white_24dp" android:keyEdgeFlags="right" />
+    <Key android:codes="260" android:keyIcon ="@drawable/ic_undo_white_24dp" android:isRepeatable="true" android:keyEdgeFlags="right" />
   </Row>
 
   <Row>

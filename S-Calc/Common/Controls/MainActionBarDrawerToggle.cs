@@ -1,9 +1,9 @@
-using Android.Support.V7.App;
-using Android.Support.V4.Widget;
-using Android.Views;
 using Android.App;
+using Android.Support.V4.Widget;
+using Android.Support.V7.App;
+using Android.Views;
 
-namespace S_Calc.Controls
+namespace S_Calc.Common.Controls
 {
     class MainActionBarDrawerToggle : ActionBarDrawerToggle
     {

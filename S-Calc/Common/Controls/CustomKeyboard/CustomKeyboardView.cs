@@ -1,11 +1,8 @@
-using System;
 using Android.Content;
-using Android.Views;
-using Android.Views.Animations;
 using Android.InputMethodServices;
 using Android.Util;
 
-namespace S_Calc.Controls
+namespace S_Calc.Common.Controls.CustomKeyboard
 {
     public class CustomKeyboardView : KeyboardView
     {

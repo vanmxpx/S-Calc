@@ -1,29 +1,25 @@
 ﻿using System;
-using Android.App;
+using Android.InputMethodServices;
 using Android.Views;
-using Java.Lang;
 using Android.Widget;
-using System.Collections.Generic;
+using Java.Lang;
+using Keycode = Android.Views.Keycode;
 
-namespace S_Calc
+namespace S_Calc.Common.Controls.CustomKeyboard
 {
-    public class KeyboardListener : Java.Lang.Object, Android.InputMethodServices.KeyboardView.IOnKeyboardActionListener
+    public class KeyboardListener : Java.Lang.Object, KeyboardView.IOnKeyboardActionListener
     {
-        private readonly Activity _activity;
         private readonly EditText input;
-        private readonly EditText output;
-        string ExchangeBuffer = string.Empty, tmps;
-        int tmpi;
-        List<Tuple<string, int>> history;
-        const int _history_list_max_limit = 100;
-        bool IsUndoKeyEnabled = false;
+        string ExchangeBuffer = string.Empty;
 
-        public KeyboardListener(Activity activity, EditText input, EditText output)
+        public string tmps { get; set; }
+        public int tmpi { get; set; }
+        public EventHandler Swipe;
+
+        public KeyboardListener(EditText input)
         {
-            _activity = activity;
             this.input = input;
-            this.output = output;
-            history = new List<Tuple<string, int>>() { Tuple.Create(string.Empty, 0) };
+            //TODO:             Android.Views.InputMethods.IInputConnection ic = CurrentInputConnection;
         }
         public void OnKey(Keycode primaryCode, Keycode[] keyCodes)
         {
@@ -39,14 +35,14 @@ namespace S_Calc
                 case Keycode.Clear:
                     ClearInput();
                     return;
-                case Keycode.Copy:
-                    CopyOutput();
-                    return;
+                //case Keycode.Copy:
+                //    CopyOutput();
+                //    return;
                 case Keycode.Paste:
                     PasteToInput();
                     return;
                 case Keycode.NavigatePrevious:
-                    if (IsUndoKeyEnabled) { Undo(); }
+                    Kernel.Keyboard.Undo();
                     return;
                 case (Keycode)34://golden ratio
                     PutString("φ", 0);
@@ -58,25 +54,25 @@ namespace S_Calc
                     PutString("π", 0);
                     return;
 
-                    /*
-                     * ln ~ 252
-                     * log ~ 253
-                     * lg ~ 254
-                     * exp ~ 255
-                     * sin ~ 256
-                     * cos ~ 257
-                     * tg ~ 258
-                     * ctg ~ 259
-                     * sec ~ 261
-                     * cosec ~ 262
-                     * arcsin ~ 263
-                     * arccos ~ 264
-                     * arctg ~ 265
-                     * arcctg ~ 266
-                     * abs ~ 267
-                     * ! ~ 268
-                     * !! ~ 269
-                     **/
+                /*
+                 * ln ~ 252
+                 * log ~ 253
+                 * lg ~ 254
+                 * exp ~ 255
+                 * sin ~ 256
+                 * cos ~ 257
+                 * tg ~ 258
+                 * ctg ~ 259
+                 * sec ~ 261
+                 * cosec ~ 262
+                 * arcsin ~ 263
+                 * arccos ~ 264
+                 * arctg ~ 265
+                 * arcctg ~ 266
+                 * abs ~ 267
+                 * ! ~ 268
+                 * !! ~ 269
+                 **/
 
                 case (Keycode)252:
                     PutString("ln()", 1);
@@ -132,20 +128,25 @@ namespace S_Calc
 
                 default:
                     var keyEvent = new KeyEvent(eventTime, eventTime, KeyEventActions.Down, primaryCode, 0, MetaKeyStates.NumLockOn);
-                    _activity.DispatchKeyEvent(keyEvent);
+                    MainActivity.Instance.DispatchKeyEvent(keyEvent);
                     return;
             }
-            
+
         }
         public void OnPress(Keycode primaryCode)
         {
-
         }
         public void OnRelease(Keycode primaryCode) { }
         public void OnText(ICharSequence text) { }
         public void SwipeDown() { }
-        public void SwipeLeft() { }
-        public void SwipeRight() { }
+        public void SwipeLeft()
+        {
+            Swipe?.Invoke(this, EventArgs.Empty);
+        }
+        public void SwipeRight()
+        {
+            Swipe?.Invoke(this, EventArgs.Empty);
+        }
         public void SwipeUp() { }
         private void ClearInput()
         {
@@ -153,20 +154,23 @@ namespace S_Calc
             input.SetSelection(0);
             OnRelease(Keycode.Unknown);
         }
-        private void CopyOutput()
-        {
-            tmps = output.Text.Replace(" = ", string.Empty);
-            if (tmps != string.Empty)
-            {
-                ExchangeBuffer = tmps;
-                ((MainActivity)_activity).ShowMessage("Результат вычислений был скопирован в буфер обмена.");
-            }
-            else
-            {
-                ((MainActivity)_activity).ShowMessage("Результат вычислений отсутствует.");
-            }
-            OnRelease(Keycode.Unknown);
-        }
+
+        //TODO: Remove to touch output control
+        //private void CopyOutput()
+        //{
+        //    tmps = output.Text.Replace(" = ", string.Empty);
+        //    if (tmps != string.Empty)
+        //    {
+        //        ExchangeBuffer = tmps;
+        //        MainActivity.Instance.ShowMessage("Результат вычислений был скопирован в буфер обмена.");
+        //    }
+        //    else
+        //    {
+        //        MainActivity.Instance.ShowMessage("Результат вычислений отсутствует.");
+        //    }
+        //    OnRelease(Keycode.Unknown);
+        //}
+
         private void PasteToInput()
         {
             if (ExchangeBuffer != string.Empty)
@@ -176,38 +180,11 @@ namespace S_Calc
             }
             else
             {
-                ((MainActivity)_activity).ShowMessage("Буфер обмена пуст.");
+                MainActivity.Instance.ShowMessage("Буфер обмена пуст.");
             }
             OnRelease(Keycode.Unknown);
         }
-        public void Undo()
-        {
-            try
-            {
-                history.RemoveAt(history.Count - 1);
-                tmps = history[history.Count - 1].Item1;
-                tmpi = history[history.Count - 1].Item2;
-                history.RemoveAt(history.Count - 1);
-                input.Text = tmps;
-                input.SetSelection(tmpi);
-            }
-            catch
-            {
-                input.SetSelection(input.Text.Length);
-                return;
-            }
-            OnRelease(Keycode.Unknown);
-        }
-        private void HistoryListAdd(string s)
-        {
-            history.Add(Tuple.Create(s,input.SelectionStart));
-            if (history.Count > _history_list_max_limit) { history.RemoveAt(0); }
-            IsUndoKeyEnabled = history.Count > 1;
-        }
-        public void OnInputTextChanged(object sender, Android.Text.TextChangedEventArgs e)
-        {
-            HistoryListAdd(input.Text);
-        }
+
         public void PutString(string s, int cursor_back)
         {
             tmpi = input.SelectionStart;

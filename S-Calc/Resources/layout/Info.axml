@@ -30,7 +30,7 @@
         android:id="@+id/textView1"
         android:paddingTop="10dp" />
     <TextView
-        android:text="  +380 50 830 54 68      @vanmxpx Telegram"
+        android:text="  Application Developer    Telegram  @vanmxpx"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/textView3" />
     <TextView
-        android:text="  +380 95 910 00 43      @NeutralUnit Telegram"
+        android:text="  Kernel Developer             Telegram  @NeutralUnit"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
