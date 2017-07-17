@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using Android.InputMethodServices;
 using Android.Views;
 using Android.Widget;
+using Android.OS;
+using Android.Views.Animations;
+using System.Threading.Tasks;
 
 namespace S_Calc.Common.Controls.CustomKeyboard
 {
@@ -23,10 +26,10 @@ namespace S_Calc.Common.Controls.CustomKeyboard
         private const int _history_list_max_limit = 100;
         private bool _undoKeyEnabled;
 
-        public CustomKeyboard()
+        public void OnCustomKeyboardCreate()
         {
-            _keyBoardDigital = new Keyboard(MainActivity.Instance, Resource.Xml.keyboard_digital);
-            _keyBoardValues = new Keyboard(MainActivity.Instance, Resource.Xml.keyboard_values);
+            _keyBoardDigital = new NumericKeyboard(MainActivity.Instance, Resource.Xml.keyboard_digital);
+            _keyBoardValues = new NumericKeyboard(MainActivity.Instance, Resource.Xml.keyboard_values);
             _currentKeyboard = _keyBoardDigital;
 
             _keyboardView = MainActivity.Instance.FindViewById<KeyboardView>(Resource.Id.keyboard_view);
@@ -35,6 +38,7 @@ namespace S_Calc.Common.Controls.CustomKeyboard
             _keyboardView.SetBackgroundColor(Android.Graphics.Color.Magenta);
 
             history = new List<Tuple<string, int>>() { Tuple.Create(string.Empty, 0) };
+
         }
 
         public void RegisterEditText(EditText target)
@@ -51,9 +55,6 @@ namespace S_Calc.Common.Controls.CustomKeyboard
             _keyboardView.OnKeyboardActionListener = _keyboardListener = new KeyboardListener(input);
             _keyboardListener.Swipe += OnSwipe;
             target.TextChanged += OnInputTextChanged;
-
-
-
         }
 
         #region Events
@@ -72,23 +73,37 @@ namespace S_Calc.Common.Controls.CustomKeyboard
         }
         public void OnSwipe(object sender, EventArgs e)
         {
+            _keyboardView.StartAnimation(AnimationUtils
+                .LoadAnimation(MainActivity.Instance, Resource.Animation.abc_fade_out));
             _currentKeyboard = _currentKeyboard == _keyBoardDigital ? _keyBoardValues : _keyBoardDigital;
             _keyboardView.Keyboard = _currentKeyboard;
+            _keyboardView.StartAnimation(AnimationUtils
+                .LoadAnimation(MainActivity.Instance, Resource.Animation.abc_fade_in));
         }
         #endregion
 
-
         public void HideCustomKeyboard()
         {
-            MainActivity.Instance.ShowMessage("K gone");
-            _keyboardView.Visibility = ViewStates.Gone;
+            if (!Visible) return;
             _keyboardView.Enabled = false;
+
+            var anim = AnimationUtils.LoadAnimation(MainActivity.Instance, Resource.Animation.abc_slide_out_bottom);
+            anim.Duration = 220;
+            _keyboardView.StartAnimation(anim);
+
+            _keyboardView.Visibility = ViewStates.Gone;
+
         }
 
         public void ShowCustomKeyboard(View v)
         {
-            MainActivity.Instance.ShowMessage("K show");
+            if (Visible) return;
             _keyboardView.Visibility = ViewStates.Visible;
+
+            var anim = AnimationUtils.LoadAnimation(MainActivity.Instance, Resource.Animation.abc_slide_in_bottom);
+            anim.Duration = 220;
+            _keyboardView.StartAnimation(anim);
+
             _keyboardView.Enabled = true;
         }
 

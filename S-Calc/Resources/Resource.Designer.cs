@@ -1840,7 +1840,25 @@ namespace S_Calc
 			public const int Icon = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public const int notification_template_icon_bg = 2130837592;
+			public const int keybackground = 2130837592;
+			
+			// aapt resource value: 0x7f020059
+			public const int normal = 2130837593;
+			
+			// aapt resource value: 0x7f02005a
+			public const int normal_func = 2130837594;
+			
+			// aapt resource value: 0x7f02005b
+			public const int normal_long = 2130837595;
+			
+			// aapt resource value: 0x7f02005e
+			public const int notification_template_icon_bg = 2130837598;
+			
+			// aapt resource value: 0x7f02005c
+			public const int pressed = 2130837596;
+			
+			// aapt resource value: 0x7f02005d
+			public const int pressed_func = 2130837597;
 			
 			static Drawable()
 			{

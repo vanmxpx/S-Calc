@@ -53,76 +53,55 @@ namespace S_Calc.Common.Controls.CustomKeyboard
                 case (Keycode)46://pi
                     PutString("π", 0);
                     return;
-
-                /*
-                 * ln ~ 252
-                 * log ~ 253
-                 * lg ~ 254
-                 * exp ~ 255
-                 * sin ~ 256
-                 * cos ~ 257
-                 * tg ~ 258
-                 * ctg ~ 259
-                 * sec ~ 261
-                 * cosec ~ 262
-                 * arcsin ~ 263
-                 * arccos ~ 264
-                 * arctg ~ 265
-                 * arcctg ~ 266
-                 * abs ~ 267
-                 * ! ~ 268
-                 * !! ~ 269
-                 **/
-
-                case (Keycode)252:
+                case (Keycode)252: //ln ~ 252
                     PutString("ln()", 1);
                     return;
-                case (Keycode)253:
+                case (Keycode)253: //log ~ 253
                     PutString("log()", 1);
                     return;
-                case (Keycode)254:
+                case (Keycode)254: //lg ~ 254
                     PutString("lg()", 1);
                     return;
-                case (Keycode)255:
+                case (Keycode)255: //exp ~ 255
                     PutString("exp()", 1);
                     return;
-                case (Keycode)256:
+                case (Keycode)256: //sin ~ 256
                     PutString("sin()", 1);
                     return;
-                case (Keycode)257:
+                case (Keycode)257: //cos ~ 257
                     PutString("cos()", 1);
                     return;
-                case (Keycode)258:
+                case (Keycode)258: //tg ~ 258
                     PutString("tg()", 1);
                     return;
-                case (Keycode)259:
+                case (Keycode)259: //ctg ~ 259
                     PutString("ctg()", 1);
                     return;
-                case (Keycode)261:
+                case (Keycode)261: //sec ~ 261
                     PutString("sec()", 1);
                     return;
-                case (Keycode)262:
+                case (Keycode)262: //cosec ~ 262
                     PutString("cosec()", 1);
                     return;
-                case (Keycode)263:
+                case (Keycode)263: //arcsin ~ 263
                     PutString("arcsin()", 1);
                     return;
-                case (Keycode)264:
+                case (Keycode)264: //arccos ~ 264
                     PutString("arccos()", 1);
                     return;
-                case (Keycode)265:
+                case (Keycode)265: //arctg ~ 265
                     PutString("arctg()", 1);
                     return;
-                case (Keycode)266:
+                case (Keycode)266: //arcctg ~ 266
                     PutString("arcctg()", 1);
-                    return;
-                case (Keycode)267:
+                    return; 
+                case (Keycode)267: //abs ~ 267
                     PutString("abs()", 1);
                     return;
-                case (Keycode)268:
+                case (Keycode)268: //! ~ 268
                     PutString("!", 0);
                     return;
-                case (Keycode)269:
+                case (Keycode)269: //!! ~ 269
                     PutString("!!", 0);
                     return;
 
@@ -148,6 +127,7 @@ namespace S_Calc.Common.Controls.CustomKeyboard
             Swipe?.Invoke(this, EventArgs.Empty);
         }
         public void SwipeUp() { }
+
         private void ClearInput()
         {
             input.Text = string.Empty;
@@ -180,7 +160,7 @@ namespace S_Calc.Common.Controls.CustomKeyboard
             }
             else
             {
-                MainActivity.Instance.ShowMessage("Буфер обмена пуст.");
+                MainActivity.Instance.ShowMessage("Buffer is empty.");
             }
             OnRelease(Keycode.Unknown);
         }

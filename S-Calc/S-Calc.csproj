@@ -45,7 +45,7 @@
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
@@ -92,6 +92,7 @@
   <ItemGroup>
     <Compile Include="Common\Controls\CustomKeyboard\CustomKeyboard.cs" />
     <Compile Include="Common\Controls\CustomKeyboard\CustomKeyboardView.cs" />
+    <Compile Include="Common\Controls\CustomKeyboard\NumericKeyboard.cs" />
     <Compile Include="Common\Controls\MainActionBarDrawerToggle.cs" />
     <Compile Include="Common\Controls\CustomKeyboard\KeyboardListener.cs" />
     <Compile Include="Kernel.cs" />
@@ -291,6 +292,12 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Packages\Math\RPNClassLibraryCSharp.dll" />
+    <AndroidResource Include="Resources\drawable\keybackground.xml" />
+    <AndroidResource Include="Resources\drawable\normal.xml" />
+    <AndroidResource Include="Resources\drawable\normal_func.xml" />
+    <AndroidResource Include="Resources\drawable\normal_long.xml" />
+    <AndroidResource Include="Resources\drawable\pressed.xml" />
+    <AndroidResource Include="Resources\drawable\pressed_func.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

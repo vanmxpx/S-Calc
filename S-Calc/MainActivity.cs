@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Android.App;
-using Android.Content.PM;
+﻿using Android.App;
 using Android.OS;
 using Android.Widget;
 using Android.Views;
@@ -11,14 +9,13 @@ using S_Calc.Common.Controls;
 using S_Calc.Common.fragments;
 using SupportToolbar = Android.Support.V7.Widget.Toolbar;
 using SupportFragment = Android.Support.V4.App.Fragment;
+using Android.Support.V4.View;
 
 namespace S_Calc
 {
     [Activity(MainLauncher = true, Icon = "@drawable/icon", Theme = "@style/AppTheme", WindowSoftInputMode = SoftInput.StateAlwaysHidden)]
-
-public class MainActivity : AppCompatActivity
+    public class MainActivity : AppCompatActivity
     {
-
         //Menu        
         private SupportToolbar _mToolBar;
         private DrawerLayout _drawerLayout;
@@ -29,7 +26,6 @@ public class MainActivity : AppCompatActivity
         private CalcFragment _calcFragment;
         private InfoFragment _infoFragment;
         private SupportFragment _currentFragment;
-        private Stack<SupportFragment> _fragmentsStack;
 
         public static MainActivity Instance { get; private set; }
 
@@ -37,11 +33,11 @@ public class MainActivity : AppCompatActivity
         {
             Instance = this;
             base.OnCreate(bundle);
-
             SetContentView(Resource.Layout.Main);
 
+            Kernel.Keyboard.OnCustomKeyboardCreate();
+
             //Setup Fragments
-            _fragmentsStack = new Stack<SupportFragment>();
             var trans = SupportFragmentManager.BeginTransaction();
             if (SupportFragmentManager.FindFragmentByTag("Calc") != null)
             {
@@ -59,14 +55,13 @@ public class MainActivity : AppCompatActivity
             }
             trans.Commit();
             _currentFragment = _calcFragment;
-            _fragmentsStack.Push(_currentFragment);
 
             // Setup Toolbar
             _mToolBar = FindViewById<SupportToolbar>(Resource.Id.toolbar);
             SetSupportActionBar(_mToolBar);
-            //SupportActionBar.SetHomeButtonEnabled(true);
             SupportActionBar.SetDisplayShowTitleEnabled(true);
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+
             //Setup Drawer
             _drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
             _drawerToggle = new MainActionBarDrawerToggle(this, _drawerLayout,
@@ -87,10 +82,8 @@ public class MainActivity : AppCompatActivity
             var trans = SupportFragmentManager.BeginTransaction();
             trans.Hide(_currentFragment);
             trans.Show(fragment);
-            trans.AddToBackStack(null);
             trans.Commit();
 
-            _fragmentsStack.Push(_currentFragment);
             _currentFragment = fragment;
         }
 
@@ -99,20 +92,14 @@ public class MainActivity : AppCompatActivity
             Toast.MakeText(this, message, ToastLength.Long).Show();
         }
 
-        //TODO: Implement back arrow
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
-            _drawerToggle.OnOptionsItemSelected(item);
-            int id = item.ItemId;
-            if (id == Resource.Id.home)
+            Kernel.Keyboard.HideCustomKeyboard();
+
+            if (item.ItemId == Android.Resource.Id.Home)
             {
-                if (SupportFragmentManager.BackStackEntryCount != 0)
-                {
-                    SupportFragmentManager.PopBackStack();
-                    _currentFragment = _fragmentsStack.Pop();
-                }
-                return true;
             }
+            _drawerToggle.OnOptionsItemSelected(item);
             return base.OnOptionsItemSelected(item);
         }
 
@@ -134,16 +121,14 @@ public class MainActivity : AppCompatActivity
             _drawerLayout.CloseDrawers();
         }
 
-        //TODO: only 1 instance of fragment
         public override void OnBackPressed()
         {
-            if (Kernel.Keyboard.Visible)
+            if (_drawerLayout.IsDrawerOpen(GravityCompat.Start))
+                _drawerLayout.CloseDrawer(GravityCompat.Start);
+            else if (Kernel.Keyboard.Visible)
                 Kernel.Keyboard.HideCustomKeyboard();
-            else if (SupportFragmentManager.BackStackEntryCount != 0)
-            {
-                SupportFragmentManager.PopBackStack();
-                _currentFragment = _fragmentsStack.Pop();
-            }
+            else if (_currentFragment != _calcFragment)
+                ShowFragment(_calcFragment);
             else
             {
                 base.OnBackPressed();

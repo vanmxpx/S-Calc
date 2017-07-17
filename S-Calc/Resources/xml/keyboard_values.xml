@@ -6,17 +6,17 @@
   <Row>
     <Key android:codes="278" android:keyIcon ="@drawable/ic_content_copy_white_24dp" android:keyEdgeFlags="left"/>
     <Key android:codes="279" android:keyIcon ="@drawable/ic_content_paste_white_24dp" />
-    <Key android:codes="260" android:keyIcon ="@drawable/ic_undo_white_24dp" />
+    <Key android:codes="260" android:keyIcon ="@drawable/ic_undo_white_24dp" android:isRepeatable="true" />
     <Key android:codes="28" android:keyIcon ="@drawable/ic_delete_white_24dp" />
-    <Key android:codes="67" android:keyIcon ="@drawable/ic_backspace_white_24dp" android:keyEdgeFlags="right" />
+    <Key android:codes="67" android:keyIcon ="@drawable/ic_backspace_white_24dp" android:isRepeatable="true" android:keyEdgeFlags="right" />
   </Row>
 
   <Row>
-    <Key android:codes="46" android:keyLabel="π" android:keyEdgeFlags="left" />
-    <Key android:codes="33" android:keyLabel="e" />
-    <Key android:codes="34" android:keyLabel="φ" />
-    <Key android:codes="35" android:keyLabel="γ" />
-    <Key android:codes="268" android:keyLabel="!" android:keyEdgeFlags="right" />
+    <Key android:codes="46" android:keyLabel="π" android:isModifier="true" android:keyEdgeFlags="left" />
+    <Key android:codes="33" android:keyLabel="e" android:isModifier="true"/>
+    <Key android:codes="34" android:keyLabel="φ" android:isModifier="true"/>
+    <Key android:codes="35" android:keyLabel="γ" android:isModifier="true"/>
+    <Key android:codes="268" android:keyLabel="!" android:isModifier="true" android:keyEdgeFlags="right" />
   </Row>
 
   <Row>

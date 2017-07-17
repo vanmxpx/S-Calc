@@ -21,8 +21,6 @@ namespace S_Calc.Common.fragments
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            // Use this to return your custom view for this Fragment
-            // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
             _view = inflater.Inflate(Resource.Layout.Calc, container, false);
 
             Input = _view.FindViewById<EditText>(Resource.Id.InputEditText);
@@ -57,20 +55,28 @@ namespace S_Calc.Common.fragments
             bool succsess;
             Controller.Evaluate(input, out output, out succsess);
 
+            //TODO: Setup error handling
             if (!succsess)
             {
-                if (lastRes)
+                if (lastRes && output != "Stack empty.")
+                {
                     Snackbar.Make(_view, output, Snackbar.LengthLong)
                         .SetAction("Undo", v =>
                         {
                             Kernel.Keyboard.Undo();
                         })
                         .Show();
+                    lastRes = false;
+                }
                 Output.Text = " =";
+
             }
             else
+            {
                 Output.Text = $" = {output}";
-            lastRes = succsess;
+                lastRes = true;
+            }
+
         }
     }
 }

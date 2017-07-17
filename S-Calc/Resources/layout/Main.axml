@@ -23,20 +23,26 @@
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
-    <!--The Custome Keyboard-->
-        <android.inputmethodservice.KeyboardView
-            android:id="@+id/keyboard_view"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:focusable="true"
-            android:gravity="bottom"
-            android:focusableInTouchMode="true"
-            android:visibility="gone"
-            android:background="#356060"
-            style="@style/grey_keyboard" />
+            android:layout_height="fill_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+            <!--The Custome Keyboard-->
+                <android.inputmethodservice.KeyboardView
+                    android:id="@+id/keyboard_view"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:focusable="true"
+                    android:gravity="bottom"
+                    android:focusableInTouchMode="true"
+                    android:visibility="gone"
+                    style="@style/grey_keyboard"
+                    android:backgroundTint="#ff00ffff" />
+            </RelativeLayout>
+        </FrameLayout>
     <!--The Left Navigation Drawer-->
         <android.support.design.widget.NavigationView
             android:layout_width="wrap_content"

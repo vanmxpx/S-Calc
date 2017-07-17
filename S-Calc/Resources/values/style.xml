@@ -12,7 +12,7 @@
   <style name="grey_keyboard">
     <item name="android:keyTextSize">30dp</item>
     <item name="android:fontFamily">roboto</item>
-    <item name="android:keyBackground">@android:color/black</item>
+    <item name="android:keyBackground">@drawable/keybackground</item>
     <item name="android:keyTextColor">@android:color/white</item>
   </style>
 </resources>
