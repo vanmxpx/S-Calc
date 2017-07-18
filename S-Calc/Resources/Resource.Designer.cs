@@ -1945,6 +1945,9 @@ namespace S_Calc
 			// aapt resource value: 0x7f070044
 			public const int buttonPanel = 2131165252;
 			
+			// aapt resource value: 0x7f070090
+			public const int calcContainer = 2131165328;
+			
 			// aapt resource value: 0x7f070084
 			public const int cancel_action = 2131165316;
 			
@@ -2004,6 +2007,9 @@ namespace S_Calc
 			
 			// aapt resource value: 0x7f07000e
 			public const int disableHome = 2131165198;
+			
+			// aapt resource value: 0x7f070091
+			public const int dragPanelContainer = 2131165329;
 			
 			// aapt resource value: 0x7f07007f
 			public const int drawer_layout = 2131165311;
@@ -2107,14 +2113,14 @@ namespace S_Calc
 			// aapt resource value: 0x7f070016
 			public const int multiply = 2131165206;
 			
-			// aapt resource value: 0x7f070091
-			public const int nav_about = 2131165329;
-			
-			// aapt resource value: 0x7f070090
-			public const int nav_calc = 2131165328;
+			// aapt resource value: 0x7f070093
+			public const int nav_about = 2131165331;
 			
 			// aapt resource value: 0x7f070092
-			public const int nav_exit = 2131165330;
+			public const int nav_calc = 2131165330;
+			
+			// aapt resource value: 0x7f070094
+			public const int nav_exit = 2131165332;
 			
 			// aapt resource value: 0x7f070082
 			public const int nav_view = 2131165314;
@@ -2476,46 +2482,52 @@ namespace S_Calc
 			public const int design_navigation_menu_item = 2130903077;
 			
 			// aapt resource value: 0x7f030026
-			public const int Info = 2130903078;
+			public const int DragPanel = 2130903078;
 			
 			// aapt resource value: 0x7f030027
-			public const int Main = 2130903079;
+			public const int Info = 2130903079;
 			
 			// aapt resource value: 0x7f030028
-			public const int notification_media_action = 2130903080;
+			public const int Main = 2130903080;
 			
 			// aapt resource value: 0x7f030029
-			public const int notification_media_cancel_action = 2130903081;
+			public const int notification_media_action = 2130903081;
 			
 			// aapt resource value: 0x7f03002a
-			public const int notification_template_big_media = 2130903082;
+			public const int notification_media_cancel_action = 2130903082;
 			
 			// aapt resource value: 0x7f03002b
-			public const int notification_template_big_media_narrow = 2130903083;
+			public const int notification_template_big_media = 2130903083;
 			
 			// aapt resource value: 0x7f03002c
-			public const int notification_template_lines = 2130903084;
+			public const int notification_template_big_media_narrow = 2130903084;
 			
 			// aapt resource value: 0x7f03002d
-			public const int notification_template_media = 2130903085;
+			public const int notification_template_lines = 2130903085;
 			
 			// aapt resource value: 0x7f03002e
-			public const int notification_template_part_chronometer = 2130903086;
+			public const int notification_template_media = 2130903086;
 			
 			// aapt resource value: 0x7f03002f
-			public const int notification_template_part_time = 2130903087;
+			public const int notification_template_part_chronometer = 2130903087;
 			
 			// aapt resource value: 0x7f030030
-			public const int select_dialog_item_material = 2130903088;
+			public const int notification_template_part_time = 2130903088;
 			
 			// aapt resource value: 0x7f030031
-			public const int select_dialog_multichoice_material = 2130903089;
+			public const int select_dialog_item_material = 2130903089;
 			
 			// aapt resource value: 0x7f030032
-			public const int select_dialog_singlechoice_material = 2130903090;
+			public const int select_dialog_multichoice_material = 2130903090;
 			
 			// aapt resource value: 0x7f030033
-			public const int support_simple_spinner_dropdown_item = 2130903091;
+			public const int select_dialog_singlechoice_material = 2130903091;
+			
+			// aapt resource value: 0x7f030034
+			public const int support_simple_spinner_dropdown_item = 2130903092;
+			
+			// aapt resource value: 0x7f030035
+			public const int Workflow = 2130903093;
 			
 			static Layout()
 			{

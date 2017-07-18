@@ -23,7 +23,7 @@ namespace S_Calc
         private NavigationView _navigationView;
 
         //Fragments
-        private CalcFragment _calcFragment;
+        private WorkflowFragment _workflowFragment;
         private InfoFragment _infoFragment;
         private SupportFragment _currentFragment;
 
@@ -39,9 +39,9 @@ namespace S_Calc
 
             //Setup Fragments
             var trans = SupportFragmentManager.BeginTransaction();
-            if (SupportFragmentManager.FindFragmentByTag("Calc") != null)
+            if (SupportFragmentManager.FindFragmentByTag("Workflow") != null)
             {
-                _calcFragment = SupportFragmentManager.FindFragmentByTag("Calc") as CalcFragment;
+                _workflowFragment = SupportFragmentManager.FindFragmentByTag("Workflow") as WorkflowFragment;
                 _infoFragment = SupportFragmentManager.FindFragmentByTag("About") as InfoFragment;
                 trans.Hide(_infoFragment);
             }
@@ -50,11 +50,11 @@ namespace S_Calc
                 _infoFragment = new InfoFragment();
                 trans.Add(Resource.Id.fragment_container, _infoFragment, "About");
                 trans.Hide(_infoFragment);
-                _calcFragment = new CalcFragment();
-                trans.Add(Resource.Id.fragment_container, _calcFragment, "Calc");
+                _workflowFragment = new WorkflowFragment();
+                trans.Add(Resource.Id.fragment_container, _workflowFragment, "Workflow");
             }
             trans.Commit();
-            _currentFragment = _calcFragment;
+            _currentFragment = _workflowFragment;
 
             // Setup Toolbar
             _mToolBar = FindViewById<SupportToolbar>(Resource.Id.toolbar);
@@ -109,7 +109,7 @@ namespace S_Calc
             switch (e.MenuItem.ItemId)
             {
                 case Resource.Id.nav_calc:
-                    ShowFragment(_calcFragment);
+                    ShowFragment(_workflowFragment);
                     break;
                 case Resource.Id.nav_about:
                     ShowFragment(_infoFragment);
@@ -127,8 +127,8 @@ namespace S_Calc
                 _drawerLayout.CloseDrawer(GravityCompat.Start);
             else if (Kernel.Keyboard.Visible)
                 Kernel.Keyboard.HideCustomKeyboard();
-            else if (_currentFragment != _calcFragment)
-                ShowFragment(_calcFragment);
+            else if (_currentFragment != _workflowFragment)
+                ShowFragment(_workflowFragment);
             else
             {
                 base.OnBackPressed();

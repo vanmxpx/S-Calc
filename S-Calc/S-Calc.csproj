@@ -93,8 +93,11 @@
     <Compile Include="Common\Controls\CustomKeyboard\CustomKeyboard.cs" />
     <Compile Include="Common\Controls\CustomKeyboard\CustomKeyboardView.cs" />
     <Compile Include="Common\Controls\CustomKeyboard\NumericKeyboard.cs" />
+    <Compile Include="Common\Controls\FrameWithDragPanelLayout.cs" />
     <Compile Include="Common\Controls\MainActionBarDrawerToggle.cs" />
     <Compile Include="Common\Controls\CustomKeyboard\KeyboardListener.cs" />
+    <Compile Include="Common\fragments\DragPanelFragment.cs" />
+    <Compile Include="Common\fragments\WorkflowFragment.cs" />
     <Compile Include="Kernel.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Common\fragments\CalcFragment.cs" />
@@ -118,6 +121,8 @@
     <AndroidResource Include="Resources\layout\Calc.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\DragPanel.axml" />
+    <AndroidResource Include="Resources\layout\Workflow.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">

@@ -19,7 +19,7 @@ namespace S_Calc.Common.Controls.CustomKeyboard
         public KeyboardListener(EditText input)
         {
             this.input = input;
-            //TODO:             Android.Views.InputMethods.IInputConnection ic = CurrentInputConnection;
+            //Android.Views.InputMethods.IInputConnection ic = CurrentInputConnection;
         }
         public void OnKey(Keycode primaryCode, Keycode[] keyCodes)
         {
@@ -38,7 +38,7 @@ namespace S_Calc.Common.Controls.CustomKeyboard
                 //case Keycode.Copy:
                 //    CopyOutput();
                 //    return;
-                case Keycode.Paste:
+                case (Keycode)279 : // Keycode.Paste ://
                     PasteToInput();
                     return;
                 case Keycode.NavigatePrevious:
@@ -117,7 +117,10 @@ namespace S_Calc.Common.Controls.CustomKeyboard
         }
         public void OnRelease(Keycode primaryCode) { }
         public void OnText(ICharSequence text) { }
-        public void SwipeDown() { }
+        public void SwipeDown()
+        {
+            Kernel.Keyboard.HideCustomKeyboard();
+        }
         public void SwipeLeft()
         {
             Swipe?.Invoke(this, EventArgs.Empty);

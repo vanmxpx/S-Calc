@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<S_Calc.Common.Controls.FrameWithDragPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+<!--    dp:shadow_drawable="@drawable/shadow_np"    dp:bottom_panel_height="64dp" dp:parallax_factor="0.5"-->
+<!-- Calculator fragment-->
+    <FrameLayout
+        android:id="@+id/calcContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+<!--Floating panel fragment-->
+    <FrameLayout
+        android:id="@+id/dragPanelContainer"
+        android:background="#FFFFFF"
+        android:layout_gravity="center"
+        android:text="hello_world"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent" />
+</S_Calc.Common.Controls.FrameWithDragPanelLayout>

@@ -27,7 +27,6 @@ namespace S_Calc.Common.fragments
             Input.ShowSoftInputOnFocus = false;
 
             Output = _view.FindViewById<EditText>(Resource.Id.OutputEditText);
-            //Output.RequestFocus();
 
             Kernel.Keyboard.RegisterEditText(Input);
             Input.TextChanged += Input_TextChanged;
