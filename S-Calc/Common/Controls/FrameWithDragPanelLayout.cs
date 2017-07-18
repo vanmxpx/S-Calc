@@ -3,6 +3,7 @@ using Android.Util;
 using Android.Widget;
 using System;
 using Android.Animation;
+using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Support.V4.View;
 using Android.Views;
@@ -78,6 +79,22 @@ namespace S_Calc.Common.Controls
         }
 
         //TODO: Draw shadow
+        public override void Draw(Canvas canvas)
+        {
+            base.Draw(canvas);
+
+            if (!IsInEditMode && willDrawShadow)
+            {
+                int left = (int)(slidingPanel.Left + slidingPanel.TranslationX);
+                shadowDrawable.SetBounds(left - shadowDrawable.IntrinsicWidth, MeasuredHeight, left, MeasuredWidth);
+                shadowDrawable.Draw(canvas);
+
+            }
+            if (animating)
+            {
+                ViewCompat.PostInvalidateOnAnimation(this);
+            }
+        }
         public override bool OnTouchEvent(MotionEvent e)
         {
             ObtainVelocityTracker();
