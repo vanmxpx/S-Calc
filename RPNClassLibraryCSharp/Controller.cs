@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Linq;
 using System.Globalization;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace RPNClassLibraryCSharp
@@ -146,7 +146,7 @@ namespace RPNClassLibraryCSharp
                 }
                 else if (ObjectsStorage.OperatorPriority.ContainsKey(tmp))
                 {
-                    if (tmp != "!" && tmp != "!!")
+                    if (tmp != "!" && tmp != "_df")
                     {
                         double operand2 = double.Parse(s.Pop(), NumberStyles.Float);
                         double operand1 = double.Parse(s.Pop(), NumberStyles.Float);
@@ -186,7 +186,7 @@ namespace RPNClassLibraryCSharp
                             operandArray[0] = double.Parse(s.Pop(), NumberStyles.Float);
                             break;
                         default:
-                            for (int i = sourceFuncRef.NumberOfArguments-1; i >= 0; i--)
+                            for (int i = sourceFuncRef.NumberOfArguments - 1; i >= 0; i--)
                             {
                                 operandArray[i] = double.Parse(s.Pop(), NumberStyles.Float);
                             }
@@ -276,6 +276,8 @@ namespace RPNClassLibraryCSharp
                 }
             });
         }
+
+        #region OUTPUT
 
         /// <summary>
         /// Добавление пользовательской функции.
@@ -391,6 +393,8 @@ namespace RPNClassLibraryCSharp
             }
         }
 
+        #endregion
+
         /// <summary>
         /// Разбиение строки выражения на список токенов.
         /// </summary>
@@ -398,13 +402,7 @@ namespace RPNClassLibraryCSharp
         /// <returns>Список токенов.</returns>
         unsafe internal static List<string> Tokenize(string primeExpression)
         {
-            primeExpression = primeExpression.Replace(" ", string.Empty)
-                .Replace("√", "sqrt")
-                .Replace("×", "*")
-                .Replace("π", "pi")
-                .Replace("γ", "gamma")
-                .Replace("φ", "phi")
-                .ToLowerInvariant();
+            TokenListPrimaryCheckingAndInterpreting(ref primeExpression);
             int len = primeExpression.Length;
             List<string> res = new List<string>(len);
             int i = 0;
@@ -414,11 +412,9 @@ namespace RPNClassLibraryCSharp
                 char cp1, cm1;
                 for (; i < len; i++, s++)
                 {
-                    cp1 = *(s+1);
-                    cm1 = *(s-1);
-                    if ((*s >= 40 && *s <= 42) || *s == '%' || *s == '/' || *s == '^' || *s == ',') { res.Add(new string(*s, 1)); continue; }
-                    else if (*s == '+' || *s == '-') { res.Add(new string(*s, 1)); continue; }
-                    else if ((*s == '+' || *s == '-') && (i == 0 || cm1 == '(')) { res.Add("0"); res.Add(new string(*s, 1)); continue; }
+                    cp1 = *(s + 1);
+                    cm1 = *(s - 1);
+                    if ((*s >= 40 && *s <= 43) || *s == '-' || *s == '%' || *s == '!' || *s == '/' || *s == '^' || *s == ',') { res.Add(new string(*s, 1)); continue; }
                     else if (char.IsDigit(*s))
                     {
                         res.Add(string.Empty);
@@ -433,10 +429,7 @@ namespace RPNClassLibraryCSharp
                         s--;
                         continue;
                     }
-                    else if (i != len - 1 && *s == '!' && cp1 != '!') { res.Add(new string(*s, 1)); continue; }
-                    else if (i != len - 1 && *s == '!' && cp1 == '!') { res.Add("!!"); i++; s++; continue; }
-                    else if (i == len - 1 && *s == '!') { res.Add(new string(*s, 1)); continue; }
-                    else if ((*s >= 65 && *s <= 90) || (*s >= 97 && *s <= 122) || (*s == 95))
+                    else if ((*s >= 65 && *s <= 90) || (*s >= 97 && *s <= 122) || (*s == '_'))
                     {
                         res.Add(string.Empty);
                         do
@@ -445,26 +438,87 @@ namespace RPNClassLibraryCSharp
                             i++;
                             s++;
                             if (i >= len) { break; }
-                        } while ((*s >= 48 && *s <= 57) || (*s >= 65 && *s <= 90) || (*s >= 97 && *s <= 122) || (*s==95));
+                        } while ((*s >= 48 && *s <= 57) || (*s >= 65 && *s <= 90) || (*s >= 97 && *s <= 122) || (*s == '_'));
                         i--;
                         s--;
                         continue;
                     }
-                    else { return null; }
-                    //throw new ArgumentException("Suspected error in expression.");
+                    else { throw new ArgumentException("Syntactic analysis has been failed, check your expression."); }
                 }
             }
-            TokenListChecking(res);
             return res;
+        }
+
+        /// <summary>
+        /// Первичная проверка и обработка выражения.
+        /// </summary>
+        /// <param name="primeExpression">Математическое выражение.</param>
+        unsafe static void TokenListPrimaryCheckingAndInterpreting(ref string primeExpression)
+        {
+            primeExpression = primeExpression.Replace(" ", string.Empty)
+                .Replace("√", "sqrt")
+                .Replace("×", "*")
+                .Replace("π", "pi")
+                .Replace("γ", "gamma")
+                .Replace("φ", "phi")
+                .ToLowerInvariant();
+            primeExpression = Regex.Replace(primeExpression, @"(\d|[)])mod(\d|[(])", "${1}%${2}");
+            primeExpression = Regex.Replace(primeExpression, @"([(])([+-])(\d)", "${1}0${2}${3}");
+            primeExpression = Regex.Replace(primeExpression, @"([)])(\d)", "${1}*${2}");
+            primeExpression = Regex.Replace(primeExpression, @"([\d|)])([\p{L}|(])", "${1}*${2}");
+            if (primeExpression[0] == '-')
+            {
+                primeExpression = primeExpression.Insert(0, "0");
+            }
+            else if (primeExpression[0] == '+')
+            {
+                primeExpression = primeExpression.Remove(0, 1);
+            }
+            primeExpression = primeExpression.Replace("!!", "_df");
+            if (primeExpression.Contains("_df!") || primeExpression.Contains("!_df") || primeExpression.Contains("_df_df"))
+            {
+                int errorIndex = 0;
+                if (primeExpression.Contains("_df!"))
+                {
+                    errorIndex = primeExpression.IndexOf("_df!");
+                }
+                else if (primeExpression.Contains("!_df"))
+                {
+                    errorIndex = primeExpression.IndexOf("!_df");
+                }
+                else
+                {
+                    errorIndex = primeExpression.IndexOf("_df_df");
+                }
+                throw new ArgumentException($"Invalid token near {errorIndex + 1} symbol: factorial must be \'!\' or \'!!\'.");
+            }
+            int i = 0;
+            int len = primeExpression.Length;
+            fixed (char* pointer = primeExpression)
+            {
+                char* s = pointer;
+                char c, cp1, cm1;
+                for (; i < len; i++, s++)
+                {
+                    c = *s;
+                    cp1 = *(s + 1);
+                    cm1 = *(s - 1);
+                    if (((c >= 43 && c <= 47) || (c >= 33 && c <= 39)) && ((cp1 >= 43 && cp1 <= 47) || (c >= 33 && c <= 39)))
+                    {
+                        throw new ArgumentException($"Invalid token near {i + 1} symbol: it is not allowed to repeat operators and separators.");
+                    }
+                }
+            }
         }
 
         /// <summary>
         /// Финальная проверка списка токенов.
         /// </summary>
         /// <param name="l">Список токенов для проверки.</param>
-        static void TokenListChecking(List<string> l)
+        [Obsolete("Contains only inserting in decimal-letter and bracket-letter a multiplication token.")]
+        static void TokenListFinalChecking(List<string> l)
         {
-            for (int i = 0, iPlusOne=1; i < l.Count; i++, iPlusOne++)
+            for (int i = 0, iPlusOne = 1; i < l.Count; i++, iPlusOne++)
             {
                 if (iPlusOne < l.Count)
                 {
@@ -479,6 +533,6 @@ namespace RPNClassLibraryCSharp
                 }
             }
         }
-
     }
 }
+
