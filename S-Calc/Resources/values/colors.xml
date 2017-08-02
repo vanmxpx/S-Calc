@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+  <color name="frameBackground">#efedef</color>
+  
+  <!--Keyboard buttons costumization-->
+  <color name="keyboardButton">#fefefe</color>
+  <color name="keyboardFuncButton">#e3e4e3</color>
+  <color name="keyboardLongButton">#3d3f44</color><!--4b4d53-->
+  <color name="keyboardPressedButton">#8f9199</color>
+  <color name="keyboardFuncPressedButton">#e8e9ea</color>
+  <color name="keyboardSeparator">#f1f2f1</color>
+<!-- Green Theme
+  <color name="keyboardButton">#283339</color>
+  <color name="keyboardFuncButton">#43878e</color>
+  <color name="keyboardLongButton">#232222</color>
+  <color name="keyboardPressedButton">#565454</color>
+  <color name="keyboardFuncPressedButton">#5dbdc6</color>-->
+  
+  <color name="psts_background_tab_pressed">#565454</color>
+</resources>

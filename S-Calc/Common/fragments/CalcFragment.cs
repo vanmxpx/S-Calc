@@ -1,8 +1,10 @@
+using Android.InputMethodServices;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Widget;
 using RPNClassLibraryCSharp;
+using S_Calc.Common.Controls.CustomKeyboard;
 
 namespace S_Calc.Common.fragments
 {
@@ -28,6 +30,7 @@ namespace S_Calc.Common.fragments
 
             Output = _view.FindViewById<EditText>(Resource.Id.OutputEditText);
 
+            Kernel.Keyboard.OnCustomKeyboardCreate(_view.FindViewById<CustomKeyboardView>(Resource.Id.keyboard_view));
             Kernel.Keyboard.RegisterEditText(Input);
             Input.TextChanged += Input_TextChanged;
             Input.RequestFocus();
@@ -49,6 +52,11 @@ namespace S_Calc.Common.fragments
 
         private void Input_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
+            if (input.Length == 0)
+            {
+                Output.Text = " =";
+                return;
+            }
             fab.Alpha = input.Length > 22 ? 0.5f : 1;
             string output;
             bool succsess;

@@ -1,15 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="horizontal"
-    android:background="#000000">
-    <Button
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="55dp"
-        android:text="doooone" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:text="add" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:background="@android:color/transparent">
+        <Button
+            android:id="@+id/functionsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/markerHeight"
+            android:text="Functions"
+            android:layout_gravity="center" />
+        <Button
+            android:id="@+id/constantsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/markerHeight"
+            android:text="Constants"
+            android:layout_gravity="center" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal"
+        android:background="@android:color/transparent">
+        <Button
+            android:id="@+id/dragButton"
+            android:background="@drawable/dragButton45"
+            android:layout_width="@dimen/dragPanelButtonWidth"
+            android:layout_height="@dimen/dragPanelButtonHeight"
+            android:padding="0dp"
+            android:layout_marginTop="15dp" />
+    <!--Functions and Constants Tabs 232222 black-->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:background="#000000">
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:focusable="true"                                 
+                android:focusableInTouchMode="true"
+                android:background="#283339" />
+            <android.support.design.widget.FloatingActionButton
+              android:id="@+id/fab_addFunc"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              app:layout_anchor="@id/viewpager"
+              android:layout_margin="24dp"
+              android:layout_alignParentRight="true"
+              android:layout_alignParentBottom="true"/>
+            <com.controls.PagerSlidingTabs
+                android:id="@+id/sliding_tabs"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#283339"
+                app:pstsPaddingMiddle="false"
+                app:pstsDividerWidth="1dp"
+                app:pstsDividerPadding="12dp"
+                app:pstsDividerColor="#698A87" 
+                android:textColor="#698A87"
+                app:pstsTextColorSelected="@android:color/white"
+                app:pstsIndicatorColor="#197068"
+                app:pstsSeparatorOnTop="true"
+                app:pstsSeparatorColor="#197068"
+                app:pstsSeparatorHeight="3dp" />
+
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

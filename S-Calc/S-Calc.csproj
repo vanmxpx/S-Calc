@@ -96,6 +96,11 @@
     <Compile Include="Common\Controls\FrameWithDragPanelLayout.cs" />
     <Compile Include="Common\Controls\MainActionBarDrawerToggle.cs" />
     <Compile Include="Common\Controls\CustomKeyboard\KeyboardListener.cs" />
+    <Compile Include="Common\Controls\PagerSlidingTabs\CostumePagerAdapter.cs" />
+    <Compile Include="Common\Controls\PagerSlidingTabs\ICustomTabProvider.cs" />
+    <Compile Include="Common\Controls\PagerSlidingTabs\IOnTabReselectedListener.cs" />
+    <Compile Include="Common\Controls\PagerSlidingTabs\PagerSlidingTabStrip.cs" />
+    <Compile Include="Common\FontManager.cs" />
     <Compile Include="Common\fragments\DragPanelFragment.cs" />
     <Compile Include="Common\fragments\WorkflowFragment.cs" />
     <Compile Include="Kernel.cs" />
@@ -106,6 +111,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\awakelight.ttf" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
@@ -123,6 +129,8 @@
     </AndroidResource>
     <AndroidResource Include="Resources\layout\DragPanel.axml" />
     <AndroidResource Include="Resources\layout\Workflow.axml" />
+    <AndroidResource Include="Resources\layout\pager_item.axml" />
+    <AndroidResource Include="Resources\layout\psts_tab.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
@@ -303,6 +311,30 @@
     <AndroidResource Include="Resources\drawable\normal_long.xml" />
     <AndroidResource Include="Resources\drawable\pressed.xml" />
     <AndroidResource Include="Resources\drawable\pressed_func.xml" />
+    <AndroidResource Include="Resources\drawable\psts_background_tab.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_keyboard_arrow_left_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_keyboard_arrow_right_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_update_white_36dp.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_keyboard_arrow_left_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_keyboard_arrow_right_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_update_white_36dp.png" />
+    <AndroidResource Include="Resources\drawable-v21\psts_background_tab.xml" />
+    <AndroidResource Include="Resources\drawable-xhdpi\dragButton40.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\dragButton45.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_keyboard_arrow_left_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_keyboard_arrow_right_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_update_white_36dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\shadow.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_keyboard_arrow_left_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_keyboard_arrow_right_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_update_white_36dp.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_keyboard_arrow_left_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_keyboard_arrow_right_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_update_white_36dp.png" />
+    <AndroidResource Include="Resources\values\attrs.xml" />
+    <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidResource Include="Resources\values\dimens.xml" />
+    <AndroidResource Include="Resources\xml\popup.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -26,16 +26,32 @@ namespace S_Calc.Common.Controls.CustomKeyboard
         private const int _history_list_max_limit = 100;
         private bool _undoKeyEnabled;
 
-        public void OnCustomKeyboardCreate()
+        //public void OnCustomKeyboardCreate()
+        //{
+        //    _keyBoardDigital = new NumericKeyboard(MainActivity.Instance, Resource.Xml.keyboard_digital);
+        //    _keyBoardValues = new NumericKeyboard(MainActivity.Instance, Resource.Xml.keyboard_values);
+        //    _currentKeyboard = _keyBoardDigital;
+
+        //    _keyboardView = MainActivity.Instance.FindViewById<KeyboardView>(Resource.Id.keyboard_view);
+        //    _keyboardView.Keyboard = _currentKeyboard;
+        //    _keyboardView.Visibility = ViewStates.Visible;
+        //    _keyboardView.SetBackgroundColor(Android.Graphics.Color.Magenta);
+        //    _keyboardView.PreviewEnabled = false;
+
+        //    history = new List<Tuple<string, int>>() { Tuple.Create(string.Empty, 0) };
+
+        //}
+        public void OnCustomKeyboardCreate(CustomKeyboardView keyboardView)
         {
             _keyBoardDigital = new NumericKeyboard(MainActivity.Instance, Resource.Xml.keyboard_digital);
             _keyBoardValues = new NumericKeyboard(MainActivity.Instance, Resource.Xml.keyboard_values);
             _currentKeyboard = _keyBoardDigital;
 
-            _keyboardView = MainActivity.Instance.FindViewById<KeyboardView>(Resource.Id.keyboard_view);
+            _keyboardView = keyboardView;// MainActivity.Instance.FindViewById<KeyboardView>(Resource.Id.keyboard_view);
             _keyboardView.Keyboard = _currentKeyboard;
             _keyboardView.Visibility = ViewStates.Visible;
             _keyboardView.SetBackgroundColor(Android.Graphics.Color.Magenta);
+            _keyboardView.PreviewEnabled = false;
 
             history = new List<Tuple<string, int>>() { Tuple.Create(string.Empty, 0) };
 

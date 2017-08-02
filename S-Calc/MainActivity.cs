@@ -10,6 +10,7 @@ using S_Calc.Common.fragments;
 using SupportToolbar = Android.Support.V7.Widget.Toolbar;
 using SupportFragment = Android.Support.V4.App.Fragment;
 using Android.Support.V4.View;
+using S_Calc.Common;
 
 namespace S_Calc
 {
@@ -31,11 +32,13 @@ namespace S_Calc
 
         protected override void OnCreate(Bundle bundle)
         {
+            FontManager.SetDefaultFont(this, "DEFAULT", "awakelight.ttf");
+            FontManager.SetDefaultFont(this, "MONOSPACE", "awakelight.ttf");
             Instance = this;
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
 
-            Kernel.Keyboard.OnCustomKeyboardCreate();
+            //Kernel.Keyboard.OnCustomKeyboardCreate();
 
             //Setup Fragments
             var trans = SupportFragmentManager.BeginTransaction();
@@ -67,6 +70,7 @@ namespace S_Calc
             _drawerToggle = new MainActionBarDrawerToggle(this, _drawerLayout,
                 Resource.String.openDrawer, Resource.String.closeDrawer);
             _drawerLayout.AddDrawerListener(_drawerToggle);
+            _drawerLayout.SetDrawerLockMode(DrawerLayout.LockModeLockedClosed);
             _drawerToggle.SyncState();
 
             _navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
@@ -94,10 +98,14 @@ namespace S_Calc
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
+            
+            _workflowFragment.HideWorkPanel();
             Kernel.Keyboard.HideCustomKeyboard();
 
+            //TODO: Add custome buttons
             if (item.ItemId == Android.Resource.Id.Home)
             {
+                _drawerLayout.SetDrawerLockMode(DrawerLayout.LockModeUnlocked);
             }
             _drawerToggle.OnOptionsItemSelected(item);
             return base.OnOptionsItemSelected(item);
@@ -125,6 +133,8 @@ namespace S_Calc
         {
             if (_drawerLayout.IsDrawerOpen(GravityCompat.Start))
                 _drawerLayout.CloseDrawer(GravityCompat.Start);
+            else if (_workflowFragment.HideWorkPanel())
+                return;
             else if (Kernel.Keyboard.Visible)
                 Kernel.Keyboard.HideCustomKeyboard();
             else if (_currentFragment != _workflowFragment)

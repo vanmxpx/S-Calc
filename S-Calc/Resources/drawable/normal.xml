@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-  <!-- To dont forget <stroke android:width="4dp" android:color="#000000" />-->
-  <solid android:color="#1c1a1a"/>
+  <stroke android:width="1px" android:color="@color/keyboardSeparator" />
+  <solid android:color="@color/keyboardButton"/>
 </shape>

@@ -4,7 +4,8 @@
     android:id="@+id/MainRelativeLayout"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="@color/frameBackground">
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,8 +29,22 @@
         android:layout_height="wrap_content"
         android:id="@+id/OutputEditText"
         android:layout_marginTop="10dip"
-        android:textSize="22sp"
+        android:textSize="24sp"
         android:enabled="false"
         android:textColor="#1C1C1C"
         android:layout_below="@id/InputEditText" />
+<!--The Custom Keyboard-->
+    <com.controls.CustomKeyboardView
+        android:id="@+id/keyboard_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:visibility="gone"
+        app:font="@string/font_awake"
+        style="@style/grey_keyboard"
+        android:backgroundTint="@color/keyboardLongButton" />
 </RelativeLayout>
