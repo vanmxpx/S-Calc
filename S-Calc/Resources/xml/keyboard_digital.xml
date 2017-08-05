@@ -7,16 +7,18 @@
 
   <Row android:rowEdgeFlags="top">
     <Key android:codes="260" android:keyIcon ="@drawable/ic_undo_white_24dp" android:isRepeatable="true" android:keyEdgeFlags="left" />
+    <Key android:codes="261" android:keyIcon ="@drawable/ic_redo_white_24dp" android:isRepeatable="true"/>
     <Key android:codes="1000" android:keyIcon="@drawable/ic_keyboard_arrow_left_white_24dp" android:isRepeatable="true" /><!--'<' character-->
-    <Key android:codes="1001" android:keyIcon="@drawable/ic_keyboard_arrow_right_white_24dp" android:horizontalGap="10%p" android:isRepeatable="true" /><!--'>' character-->
+    <Key android:codes="1001" android:keyIcon="@drawable/ic_keyboard_arrow_right_white_24dp" android:isRepeatable="true" /><!--'>' character-->
+    <Key android:codes="279" android:keyIcon ="@drawable/ic_content_paste_white_24dp" android:isRepeatable="true"/>
     <Key android:codes="28" android:keyIcon ="@drawable/ic_delete_white_24dp"  android:isRepeatable="true"/>
     <Key android:codes="67" android:keyIcon ="@drawable/ic_backspace_white_24dp" android:isRepeatable="true" android:keyEdgeFlags="right" />
     
   </Row>
 
   <Row>
-    <Key android:codes="0" android:keyLabel=""  android:isModifier= "true" android:keyEdgeFlags="left" />
-    <Key android:codes="0" android:keyLabel=""  android:isModifier= "true" />
+    <Key android:codes="268" android:keyLabel="!"  android:isModifier= "true" android:keyEdgeFlags="left" />
+    <Key android:codes="269" android:keyLabel="!!"  android:isModifier= "true" />
     <Key android:codes="8" android:keyLabel="1" />
     <Key android:codes="9" android:keyLabel="2" />
     <Key android:codes="10" android:keyLabel="3"  />
@@ -24,8 +26,8 @@
   </Row>
 
   <Row>
-    <Key android:codes="0" android:keyLabel=""  android:isModifier= "true" android:keyEdgeFlags="left" />
-    <Key android:codes="0" android:keyLabel=""  android:isModifier= "true"/>
+    <Key android:codes="252" android:keyLabel="mod"  android:isModifier= "true" android:keyEdgeFlags="left" />
+    <Key android:codes="253" android:keyLabel= "rnd"  android:isModifier= "true"/>
     <Key android:codes="11" android:keyLabel="4" />
     <Key android:codes="12" android:keyLabel="5" />
     <Key android:codes="13" android:keyLabel="6" />

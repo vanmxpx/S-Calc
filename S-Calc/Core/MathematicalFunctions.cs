@@ -6,8 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RPNClassLibraryCSharp
+namespace S_Calc.Core
 {
+    /// <summary>
+    /// Математические функции.
+    /// </summary>
     static class MathematicalFunctions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -16,7 +19,7 @@ namespace RPNClassLibraryCSharp
             if (n == 0) { return 1; }
             else if (n < 0)
             {
-                throw new ArgumentOutOfRangeException("Argument must not be negative");
+                throw new ArgumentOutOfRangeException("Internal function error: argument must not be negative.");
             }
             else
             {
@@ -82,8 +85,13 @@ namespace RPNClassLibraryCSharp
             return res;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static UInt64 RandomPositiveInteger(UInt64 from, UInt64 to)
         {
+            if (to <= from)
+            {
+                throw new ArgumentOutOfRangeException("Internal function error: first argument must be less than second argument.");
+            }
             RandomNumberGenerator rnd = RandomNumberGenerator.Create();
             byte[] bytes = new byte[8];
             rnd.GetBytes(bytes);

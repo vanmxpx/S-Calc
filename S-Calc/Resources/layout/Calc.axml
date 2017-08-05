@@ -30,7 +30,7 @@
         android:id="@+id/OutputEditText"
         android:layout_marginTop="10dip"
         android:textSize="24sp"
-        android:enabled="false"
+        android:editable="false"
         android:textColor="#1C1C1C"
         android:layout_below="@id/InputEditText" />
 <!--The Custom Keyboard-->

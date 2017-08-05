@@ -18,13 +18,9 @@ namespace S_Calc.Common.Controls.CustomKeyboard
         private Keyboard _currentKeyboard;
 
         private EditText input;
+        private EditText output;
 
         public bool Visible => _keyboardView.Visibility == ViewStates.Visible;
-
-        //History
-        private List<Tuple<string, int>> history;
-        private const int _history_list_max_limit = 100;
-        private bool _undoKeyEnabled;
 
         //public void OnCustomKeyboardCreate()
         //{
@@ -53,13 +49,11 @@ namespace S_Calc.Common.Controls.CustomKeyboard
             _keyboardView.SetBackgroundColor(Android.Graphics.Color.Magenta);
             _keyboardView.PreviewEnabled = false;
 
-            history = new List<Tuple<string, int>>() { Tuple.Create(string.Empty, 0) };
-
         }
 
-        public void RegisterEditText(EditText target)
+        public void RegisterEditText(EditText target, EditText output)
         {
-            this.input = target;
+            input = target;
             // Make the custom keyboard appear
             input.OnFocusChangeListener = this;
             input.SetOnClickListener(this);
@@ -68,9 +62,8 @@ namespace S_Calc.Common.Controls.CustomKeyboard
             target.InputType = target.InputType | Android.Text.InputTypes.TextFlagNoSuggestions;
 
             //Handle text changing
-            _keyboardView.OnKeyboardActionListener = _keyboardListener = new KeyboardListener(input);
+            _keyboardView.OnKeyboardActionListener = _keyboardListener = new KeyboardListener(input, output);
             _keyboardListener.Swipe += OnSwipe;
-            target.TextChanged += OnInputTextChanged;
         }
 
         #region Events
@@ -78,10 +71,6 @@ namespace S_Calc.Common.Controls.CustomKeyboard
         {
             if (hasFocus) ShowCustomKeyboard(v);
             else HideCustomKeyboard();
-        }
-        public void OnInputTextChanged(object sender, Android.Text.TextChangedEventArgs e)
-        {
-            HistoryListAdd(e.Text.ToString());
         }
         public void OnClick(View v)
         {
@@ -121,34 +110,6 @@ namespace S_Calc.Common.Controls.CustomKeyboard
             _keyboardView.StartAnimation(anim);
 
             _keyboardView.Enabled = true;
-        }
-
-        private void HistoryListAdd(string s)
-        {
-            history.Add(Tuple.Create(s, input.SelectionStart));
-            if (history.Count > _history_list_max_limit) { history.RemoveAt(0); }
-            _undoKeyEnabled = history.Count > 0;
-        }
-
-        public void Undo()
-        {
-            if (!_undoKeyEnabled) return;
-            try
-            {
-                history.RemoveAt(history.Count - 1);
-                _keyboardListener.tmps = history[history.Count - 1].Item1;
-                _keyboardListener.tmpi = history[history.Count - 1].Item2;
-                history.RemoveAt(history.Count - 1);
-                input.Text = _keyboardListener.tmps;
-                input.SetSelection(_keyboardListener.tmpi);
-            }
-            catch
-            {
-                input.SetSelection(input.Text.Length);
-                return;
-            }
-            _keyboardListener.OnRelease(Android.Views.Keycode.Unknown);
-
         }
     }
 }

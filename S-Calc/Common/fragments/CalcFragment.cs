@@ -3,7 +3,7 @@ using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Widget;
-using RPNClassLibraryCSharp;
+using S_Calc.Core;
 using S_Calc.Common.Controls.CustomKeyboard;
 
 namespace S_Calc.Common.fragments
@@ -31,59 +31,59 @@ namespace S_Calc.Common.fragments
             Output = _view.FindViewById<EditText>(Resource.Id.OutputEditText);
 
             Kernel.Keyboard.OnCustomKeyboardCreate(_view.FindViewById<CustomKeyboardView>(Resource.Id.keyboard_view));
-            Kernel.Keyboard.RegisterEditText(Input);
-            Input.TextChanged += Input_TextChanged;
+            Kernel.Keyboard.RegisterEditText(Input, Output);
+            //Input.TextChanged += Input_TextChanged;
             Input.RequestFocus();
 
             fab = _view.FindViewById<FloatingActionButton>(Resource.Id.fab_equals);
 
             fab.Click += (o, e) =>
             {
-                if (lastRes)
-                {
-                    Input.Text = Output.Text.Replace(" = ", string.Empty);
-                    Input.SetSelection(Input.Text.Length);
-                }
+                //if (lastRes)
+                //{
+                //    Input.Text = Output.Text.Replace(" = ", string.Empty);
+                //    Input.SetSelection(Input.Text.Length);
+                //}
             };
             return _view;
         }
 
-        bool lastRes;
+        //bool lastRes;
 
-        private void Input_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
-        {
-            if (input.Length == 0)
-            {
-                Output.Text = " =";
-                return;
-            }
-            fab.Alpha = input.Length > 22 ? 0.5f : 1;
-            string output;
-            bool succsess;
-            Controller.Evaluate(input, out output, out succsess);
+        //private void Input_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
+        //{
+        //    if (input.Length == 0)
+        //    {
+        //        Output.Text = " =";
+        //        return;
+        //    }
+        //    fab.Alpha = input.Length > 22 ? 0.5f : 1;
+        //    string output;
+        //    bool succsess;
+        //    Controller.Evaluate(input, Input.SelectionStart, out output, out succsess);
 
-            //TODO: Setup error handling
-            if (!succsess)
-            {
-                if (lastRes && output != "Stack empty.")
-                {
-                    Snackbar.Make(_view, output, Snackbar.LengthLong)
-                        .SetAction("Undo", v =>
-                        {
-                            Kernel.Keyboard.Undo();
-                        })
-                        .Show();
-                    lastRes = false;
-                }
-                Output.Text = " =";
+        //    //TODO: Setup error handling
+        //    if (!succsess)
+        //    {
+        //        //if (lastRes && output != "Stack empty.")
+        //        //{
+        //        //    Snackbar.Make(_view, output, Snackbar.LengthLong)
+        //        //        .SetAction("Undo", v =>
+        //        //        {
+        //        //            Kernel.Keyboard.Undo();
+        //        //        })
+        //        //        .Show();
+        //        //    lastRes = false;
+        //        //}
+        //        Output.Text = " =";
 
-            }
-            else
-            {
-                Output.Text = $" = {output}";
-                lastRes = true;
-            }
+        //    }
+        //    else
+        //    {
+        //        Output.Text = $" = {output}";
+        //        lastRes = true;
+        //    }
 
-        }
+        //}
     }
 }

@@ -32,6 +32,7 @@ namespace S_Calc
 
         protected override void OnCreate(Bundle bundle)
         {
+            Core.Controller.DoNothing();
             FontManager.SetDefaultFont(this, "DEFAULT", "awakelight.ttf");
             FontManager.SetDefaultFont(this, "MONOSPACE", "awakelight.ttf");
             Instance = this;

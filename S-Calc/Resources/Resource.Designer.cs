@@ -1951,43 +1951,46 @@ namespace S_Calc
 			public const int ic_keyboard_arrow_right_white_24dp = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int ic_rotate_90_degrees_ccw_black_24dp = 2130837593;
+			public const int ic_redo_white_24dp = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int ic_undo_white_24dp = 2130837594;
+			public const int ic_rotate_90_degrees_ccw_black_24dp = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public const int ic_update_white_36dp = 2130837595;
+			public const int ic_undo_white_24dp = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
-			public const int Icon = 2130837596;
+			public const int ic_update_white_36dp = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public const int keybackground = 2130837597;
+			public const int Icon = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public const int normal = 2130837598;
+			public const int keybackground = 2130837598;
 			
 			// aapt resource value: 0x7f02005f
-			public const int normal_func = 2130837599;
+			public const int normal = 2130837599;
 			
 			// aapt resource value: 0x7f020060
-			public const int normal_long = 2130837600;
-			
-			// aapt resource value: 0x7f020065
-			public const int notification_template_icon_bg = 2130837605;
+			public const int normal_func = 2130837600;
 			
 			// aapt resource value: 0x7f020061
-			public const int pressed = 2130837601;
+			public const int normal_long = 2130837601;
+			
+			// aapt resource value: 0x7f020066
+			public const int notification_template_icon_bg = 2130837606;
 			
 			// aapt resource value: 0x7f020062
-			public const int pressed_func = 2130837602;
+			public const int pressed = 2130837602;
 			
 			// aapt resource value: 0x7f020063
-			public const int psts_background_tab = 2130837603;
+			public const int pressed_func = 2130837603;
 			
 			// aapt resource value: 0x7f020064
-			public const int shadow = 2130837604;
+			public const int psts_background_tab = 2130837604;
+			
+			// aapt resource value: 0x7f020065
+			public const int shadow = 2130837605;
 			
 			static Drawable()
 			{

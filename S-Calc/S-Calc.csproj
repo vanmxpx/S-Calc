@@ -38,6 +38,7 @@
     <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
     <EnableProguard>False</EnableProguard>
     <AndroidSupportedAbis />
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -56,10 +57,6 @@
     <Reference Include="Mono.Android" />
     <Reference Include="Mono.Android.Export" />
     <Reference Include="mscorlib" />
-    <Reference Include="RPNClassLibraryCSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Packages\Math\RPNClassLibraryCSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -103,6 +100,17 @@
     <Compile Include="Common\FontManager.cs" />
     <Compile Include="Common\fragments\DragPanelFragment.cs" />
     <Compile Include="Common\fragments\WorkflowFragment.cs" />
+    <Compile Include="Core\CalculationHistory.cs" />
+    <Compile Include="Core\Constant.cs" />
+    <Compile Include="Core\Controller.cs" />
+    <Compile Include="Core\Evaluator.cs" />
+    <Compile Include="Core\Extensions.cs" />
+    <Compile Include="Core\Function.cs" />
+    <Compile Include="Core\HistoryBuffer.cs" />
+    <Compile Include="Core\ICalculatorUnit.cs" />
+    <Compile Include="Core\MathematicalFunctions.cs" />
+    <Compile Include="Core\ObjectsStorage.cs" />
+    <Compile Include="Core\Token.cs" />
     <Compile Include="Kernel.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Common\fragments\CalcFragment.cs" />
@@ -302,9 +310,10 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_undo_white_24dp.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="Packages\Math\RPNClassLibraryCSharp.dll" />
+    <Folder Include="Packages\" />
+  </ItemGroup>
+  <ItemGroup>
     <AndroidResource Include="Resources\drawable\keybackground.xml" />
     <AndroidResource Include="Resources\drawable\normal.xml" />
     <AndroidResource Include="Resources\drawable\normal_func.xml" />
@@ -335,6 +344,7 @@
     <AndroidResource Include="Resources\values\colors.xml" />
     <AndroidResource Include="Resources\values\dimens.xml" />
     <AndroidResource Include="Resources\xml\popup.xml" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_redo_white_24dp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
