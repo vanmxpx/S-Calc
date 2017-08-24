@@ -18,32 +18,16 @@ namespace S_Calc.Common.Controls.CustomKeyboard
         private Keyboard _currentKeyboard;
 
         private EditText input;
-        private EditText output;
 
         public bool Visible => _keyboardView.Visibility == ViewStates.Visible;
 
-        //public void OnCustomKeyboardCreate()
-        //{
-        //    _keyBoardDigital = new NumericKeyboard(MainActivity.Instance, Resource.Xml.keyboard_digital);
-        //    _keyBoardValues = new NumericKeyboard(MainActivity.Instance, Resource.Xml.keyboard_values);
-        //    _currentKeyboard = _keyBoardDigital;
-
-        //    _keyboardView = MainActivity.Instance.FindViewById<KeyboardView>(Resource.Id.keyboard_view);
-        //    _keyboardView.Keyboard = _currentKeyboard;
-        //    _keyboardView.Visibility = ViewStates.Visible;
-        //    _keyboardView.SetBackgroundColor(Android.Graphics.Color.Magenta);
-        //    _keyboardView.PreviewEnabled = false;
-
-        //    history = new List<Tuple<string, int>>() { Tuple.Create(string.Empty, 0) };
-
-        //}
-        public void OnCustomKeyboardCreate(CustomKeyboardView keyboardView)
+        public void OnCustomKeyboardCreate(RippleKeyboardView keyboardView)
         {
-            _keyBoardDigital = new NumericKeyboard(MainActivity.Instance, Resource.Xml.keyboard_digital);
-            _keyBoardValues = new NumericKeyboard(MainActivity.Instance, Resource.Xml.keyboard_values);
+            _keyBoardDigital = new NumericKeyboard(Kernel.Activity, Resource.Xml.keyboard_digital);
+            _keyBoardValues = new NumericKeyboard(Kernel.Activity, Resource.Xml.keyboard_values);
             _currentKeyboard = _keyBoardDigital;
 
-            _keyboardView = keyboardView;// MainActivity.Instance.FindViewById<KeyboardView>(Resource.Id.keyboard_view);
+            _keyboardView = keyboardView;
             _keyboardView.Keyboard = _currentKeyboard;
             _keyboardView.Visibility = ViewStates.Visible;
             _keyboardView.SetBackgroundColor(Android.Graphics.Color.Magenta);
@@ -79,11 +63,11 @@ namespace S_Calc.Common.Controls.CustomKeyboard
         public void OnSwipe(object sender, EventArgs e)
         {
             _keyboardView.StartAnimation(AnimationUtils
-                .LoadAnimation(MainActivity.Instance, Resource.Animation.abc_fade_out));
+                .LoadAnimation(Kernel.Activity, Resource.Animation.abc_fade_out));
             _currentKeyboard = _currentKeyboard == _keyBoardDigital ? _keyBoardValues : _keyBoardDigital;
             _keyboardView.Keyboard = _currentKeyboard;
             _keyboardView.StartAnimation(AnimationUtils
-                .LoadAnimation(MainActivity.Instance, Resource.Animation.abc_fade_in));
+                .LoadAnimation(Kernel.Activity, Resource.Animation.abc_fade_in));
         }
         #endregion
 
@@ -92,7 +76,7 @@ namespace S_Calc.Common.Controls.CustomKeyboard
             if (!Visible) return;
             _keyboardView.Enabled = false;
 
-            var anim = AnimationUtils.LoadAnimation(MainActivity.Instance, Resource.Animation.abc_slide_out_bottom);
+            var anim = AnimationUtils.LoadAnimation(Kernel.Activity, Resource.Animation.abc_slide_out_bottom);
             anim.Duration = 220;
             _keyboardView.StartAnimation(anim);
 
@@ -105,7 +89,7 @@ namespace S_Calc.Common.Controls.CustomKeyboard
             if (Visible) return;
             _keyboardView.Visibility = ViewStates.Visible;
 
-            var anim = AnimationUtils.LoadAnimation(MainActivity.Instance, Resource.Animation.abc_slide_in_bottom);
+            var anim = AnimationUtils.LoadAnimation(Kernel.Activity, Resource.Animation.abc_slide_in_bottom);
             anim.Duration = 220;
             _keyboardView.StartAnimation(anim);
 

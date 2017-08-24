@@ -67,7 +67,7 @@ namespace S_Calc.Common.Controls
             panelPeekWidth = a.GetDimensionPixelSize(Resource.Styleable.FrameWithDragPanelLayout_panelPeekWidth, panelPeekWidth);
             markerHeight = a.GetDimensionPixelSize(Resource.Styleable.FrameWithDragPanelLayout_markerHeight, markerHeight);
             parallaxFactor = a.GetFloat(Resource.Styleable.FrameWithDragPanelLayout_parallaxFactor, parallaxFactor);
-            panelPeekPadding = markerHeight + (int)TypedValue.ApplyDimension(ComplexUnitType.Px, 15, Resources.DisplayMetrics);
+            panelPeekPadding = markerHeight + (int)TypedValue.ApplyDimension(ComplexUnitType.Px, 45, Resources.DisplayMetrics);
             panelPeekHeight = markerHeight + a.GetDimensionPixelSize(Resource.Styleable.FrameWithDragPanelLayout_panelPeekHeight, 40);
             //TODO: Draw shadow
             int shadowDrawableId = a.GetResourceId(Resource.Styleable.FrameWithDragPanelLayout_shadowDrawable, -1);
@@ -274,21 +274,21 @@ namespace S_Calc.Common.Controls
         }
 
         #region Tools
-
         public bool CheckPanelTouch(MotionEvent e)
         {
             int x = (int)e.GetX();
             int y = (int)e.GetY();
-            bool a = x > slidingPanel.Left + panelPeekWidth  &&
+            int dragBottom = opened ? slidingPanel.Bottom : slidingPanel.Top + panelPeekPadding + panelPeekHeight; // if closed, drag only by button;
+            bool topButtons = x > slidingPanel.Left + panelPeekWidth  &&
                 y > slidingPanel.Top &&
+                y < dragBottom &&
                 y < slidingPanel.Top + markerHeight;
-            bool b =
+            bool dragButton =
                (y > slidingPanel.Top + panelPeekPadding ) &&
-                y < slidingPanel.Top + panelPeekPadding + panelPeekHeight &&
                 x > slidingPanel.Left - 40 &&
                 x < slidingPanel.Left + panelPeekWidth + panelPeekWidth;
 
-            return a || b;
+            return topButtons || dragButton;
         }
 
         public void ObtainVelocityTracker()

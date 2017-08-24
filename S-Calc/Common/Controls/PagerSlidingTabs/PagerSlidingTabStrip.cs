@@ -12,8 +12,6 @@ using Android.OS;
 using Java.Interop;
 using Android.Support.V4.Content;
 
-//version 1.0.9
-
 namespace S_Calc.Common.Controls.PagerSlidingTabs
 {
     [Register("com.controls.PagerSlidingTabs")]
@@ -478,15 +476,7 @@ namespace S_Calc.Common.Controls.PagerSlidingTabs
             for (int i = 0; i < tabCount; i++)
             {
 
-                if (pager.Adapter is ICustomTabProvider)
-                {
-                    tabView = ((ICustomTabProvider)pager.Adapter).GetCustomTabView(this, i);
-                }
-                else
-                {
-                    tabView = LayoutInflater.From(Context).Inflate(Resource.Layout.psts_tab, this, false);
-                }
-
+                tabView = LayoutInflater.From(Context).Inflate(Resource.Layout.psts_tab, this, false);
                 var title = pager.Adapter.GetPageTitle(i);
 
                 AddTab(i, title, tabView);
@@ -703,7 +693,7 @@ namespace S_Calc.Common.Controls.PagerSlidingTabs
             if (separatorOnTop)
                 canvas.DrawRect(first + paddingLeft, 0, second + paddingLeft, indicatorHeight + separatorHeight, rectPaint);
             else
-                canvas.DrawRect(first + paddingLeft, height - indicatorHeight, second + paddingLeft, height, rectPaint);
+                canvas.DrawRect(first + paddingLeft, height - (indicatorHeight + separatorHeight), second + paddingLeft, height, rectPaint);
 
             //draw underline
             rectPaint.Color = new Color(separatorColor);

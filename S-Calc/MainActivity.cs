@@ -14,32 +14,29 @@ using S_Calc.Common;
 
 namespace S_Calc
 {
-    [Activity(MainLauncher = true, Icon = "@drawable/icon", Theme = "@style/AppTheme", WindowSoftInputMode = SoftInput.StateAlwaysHidden)]
+    [Activity(MainLauncher = true, Icon  = "@drawable/icon",   ScreenOrientation   = Android.Content.PM.ScreenOrientation.SensorPortrait,
+                                   Theme = "@style/AppTheme",  WindowSoftInputMode = SoftInput.StateAlwaysHidden)]
     public class MainActivity : AppCompatActivity
     {
         //Menu        
-        private SupportToolbar _mToolBar;
-        private DrawerLayout _drawerLayout;
-        private MainActionBarDrawerToggle _drawerToggle;
-        private NavigationView _navigationView;
+        private SupportToolbar              _mToolBar;
+        private DrawerLayout                _drawerLayout;
+        private MainActionBarDrawerToggle   _drawerToggle;
+        private NavigationView              _navigationView;
 
         //Fragments
-        private WorkflowFragment _workflowFragment;
-        private InfoFragment _infoFragment;
-        private SupportFragment _currentFragment;
-
-        public static MainActivity Instance { get; private set; }
+        private WorkflowFragment            _workflowFragment;
+        private InfoFragment                _infoFragment;
+        private SupportFragment             _currentFragment;
 
         protected override void OnCreate(Bundle bundle)
         {
-            Core.Controller.DoNothing();
+            Core.Controller.DoNothing();//<== ето пiзда 
             FontManager.SetDefaultFont(this, "DEFAULT", "awakelight.ttf");
             FontManager.SetDefaultFont(this, "MONOSPACE", "awakelight.ttf");
-            Instance = this;
+            Kernel.Activity = this;
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
-
-            //Kernel.Keyboard.OnCustomKeyboardCreate();
 
             //Setup Fragments
             var trans = SupportFragmentManager.BeginTransaction();

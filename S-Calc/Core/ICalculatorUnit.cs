@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace S_Calc.Core
 {
-    interface ICalculatorUnit
+    public interface ICalculatorUnit
     {
         string Name { get; }
 

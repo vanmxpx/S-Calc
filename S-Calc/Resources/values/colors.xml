@@ -2,6 +2,7 @@
 <resources>
 
   <color name="frameBackground">#efedef</color>
+  <color name="rippelColor">#356060</color>
   
   <!--Keyboard buttons costumization-->
   <color name="keyboardButton">#fefefe</color>
@@ -16,6 +17,9 @@
   <color name="keyboardLongButton">#232222</color>
   <color name="keyboardPressedButton">#565454</color>
   <color name="keyboardFuncPressedButton">#5dbdc6</color>-->
-  
+
+  <!--Panel buttons-->
+  <color name="but_panel_state_active">#ffffff</color>
+  <color name="but_panel_state_unactive">#698A87</color>
   <color name="psts_background_tab_pressed">#565454</color>
 </resources>

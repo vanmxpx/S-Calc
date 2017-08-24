@@ -11,10 +11,12 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using S_Calc.Common.Controls;
+using S_Calc.Common.Controls.PagerSlidingTabs;
+using S_Calc.Core;
 
 namespace S_Calc.Common.fragments
 {
-    public class WorkflowFragment : Android.Support.V4.App.Fragment
+    public class WorkflowFragment : Android.Support.V4.App.Fragment, AdapterView.IOnItemClickListener
     { 
         private View _view;
 
@@ -31,6 +33,9 @@ namespace S_Calc.Common.fragments
         {
             _calcFragment  = new CalcFragment();
             _panelFragment = new DragPanelFragment();
+
+            _panelFragment.Listener = this;
+
             base.OnCreate(savedInstanceState);
         }
 
@@ -42,6 +47,7 @@ namespace S_Calc.Common.fragments
             _dragPanelContainer = _view.FindViewById<FrameLayout>(Resource.Id.dragPanelContainer);
 
             _panelFragment.DragButtonClick += OnDragButtonClick;
+
 
             var trans = Activity.SupportFragmentManager.BeginTransaction();
             trans.Add(_calcContainer.Id,      _calcFragment,  "Calc");
@@ -72,6 +78,19 @@ namespace S_Calc.Common.fragments
         {
             if (_frameWithDragPanel.PanelState) _frameWithDragPanel.Close();
             else _frameWithDragPanel.Open();
+        }
+
+        public void OnItemClick(AdapterView parent, View view, int position, long id)
+        {
+            if (_panelFragment.PagerState == PagerType.Functions)
+            {
+                Function f = ObjectTypeHelper.Cast<Function>(parent.GetItemAtPosition(position));
+                _calcFragment.AddCaclUnit(f.Name, f.NumberOfArguments);
+            }
+            else
+                _calcFragment.AddCaclUnit(ObjectTypeHelper.Cast<Constant>(parent.GetItemAtPosition(position)).Name);
+
+            HideWorkPanel();
         }
 
     }

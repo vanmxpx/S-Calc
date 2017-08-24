@@ -6,4 +6,19 @@
 
     <!--Fonts-->
     <string name="font_awake">awakelight</string>
+  
+    <!--Functions Types-->
+    <string-array name="func_types">
+      <item>Favorites</item>
+      <item>Trigonometric</item>
+      <item>Hyperbolic</item>
+      <item>Common</item>
+      <item>Special</item>
+      <item>Custom</item>
+    </string-array>
+  <!--Constants Types-->
+  <string-array name="const_types">
+    <item>Internal</item>
+    <item>Custom</item>
+  </string-array>
 </resources>

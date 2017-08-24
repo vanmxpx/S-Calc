@@ -2,35 +2,26 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
   <!-- Non focused states -->
   <item
-      android:state_focused="false"
-      android:state_selected="false"
-      android:state_pressed="false"
       android:state_single="false"
       android:state_long_pressable="false"
       android:drawable="@drawable/normal" />
   <!-- Non focused states long -->
   <item
-      android:state_focused="false"
-      android:state_selected="false"
-      android:state_pressed="false"
       android:state_single="false"
       android:state_long_pressable="true"
       android:drawable="@drawable/normal_long" />
   <!-- Non focused states func -->
   <item
-      android:state_focused="false"
-      android:state_selected="false"
-      android:state_pressed="false"
       android:state_single="true"
       android:drawable="@drawable/normal_func" />
-  <!-- Pressed state -->
+  <!-- Pressed state 
   <item
       android:state_pressed="true"
       android:state_single="false"
-      android:drawable="@drawable/pressed" />
-  <!-- Pressed state func -->
+      android:drawable="@drawable/pressed" />-->
+  <!-- Pressed state func 
   <item
       android:state_pressed="true"
       android:state_single="true"
-      android:drawable="@drawable/pressed_func" />
+      android:drawable="@drawable/pressed_func" />-->
 </selector>

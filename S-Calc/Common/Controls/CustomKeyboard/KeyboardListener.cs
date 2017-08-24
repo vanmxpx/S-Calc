@@ -8,23 +8,7 @@ using Keycode = Android.Views.Keycode;
 
 namespace S_Calc.Common.Controls.CustomKeyboard
 {
-    public class OutputTouchListener: Java.Lang.Object, View.IOnTouchListener
-    {
-        readonly KeyboardListener listener;
-
-        public OutputTouchListener(KeyboardListener listener)
-        {
-            this.listener = listener;
-        }
-
-        public bool OnTouch(View v, MotionEvent e)
-        {
-            listener.CopyOutput();
-            return true;
-        }
-    }
-
-    public class KeyboardListener : Java.Lang.Object, KeyboardView.IOnKeyboardActionListener
+    public class KeyboardListener : Java.Lang.Object, KeyboardView.IOnKeyboardActionListener, View.IOnTouchListener
     {
         private readonly EditText input;
         private readonly EditText output;
@@ -37,7 +21,7 @@ namespace S_Calc.Common.Controls.CustomKeyboard
         {
             this.input = input;
             this.output = output;
-            this.output.SetOnTouchListener(new OutputTouchListener(this));
+            this.output.SetOnTouchListener(this);
             this.input.TextChanged += Input_TextChanged;
             //Android.Views.InputMethods.IInputConnection ic = CurrentInputConnection;
         }
@@ -47,13 +31,19 @@ namespace S_Calc.Common.Controls.CustomKeyboard
             Controller.Evaluate(input.Text, input.SelectionStart, out string result, out bool succsess);
             if (!succsess)
             {
-                output.Text = " =";
+                output.Text = string.Empty;
             }
             else
             {
-                output.Text = $" = {result}";
+                output.Text = result;
             }
 
+        }
+
+        public bool OnTouch(View v, MotionEvent e)
+        {
+            CopyOutput();
+            return true;
         }
 
         public void OnKey(Keycode primaryCode, Keycode[] keyCodes)
@@ -103,7 +93,7 @@ namespace S_Calc.Common.Controls.CustomKeyboard
 
                 default:
                     var keyEvent = new KeyEvent(eventTime, eventTime, KeyEventActions.Down, primaryCode, 0, MetaKeyStates.NumLockOn);
-                    MainActivity.Instance.DispatchKeyEvent(keyEvent);
+                    Kernel.Activity.DispatchKeyEvent(keyEvent);
                     return;
             }
 
@@ -139,7 +129,7 @@ namespace S_Calc.Common.Controls.CustomKeyboard
                 Input_TextChanged(null, null);
             }
             input.TextChanged += Input_TextChanged;
-            OnRelease(Keycode.Unknown);
+            OnRelease((Keycode)67);
         }
 
         private void Undo()
@@ -152,19 +142,19 @@ namespace S_Calc.Common.Controls.CustomKeyboard
                 input.SetSelection(CursorPosition);
                 if (success)
                 {
-                    output.Text = " = " + string.Copy(Result);
+                    output.Text = string.Copy(Result);
                 }
                 else
                 {
-                    output.Text = " =";
+                    output.Text = string.Empty;
                 }
                 input.TextChanged += Input_TextChanged;
             }
             else
             {
-                Toast.MakeText(MainActivity.Instance, "Undo option does not available.", ToastLength.Long).Show();
+                Kernel.Activity.ShowMessage("Undo option does not available.");
             }
-            OnRelease(Keycode.Unknown);
+            OnRelease((Keycode)260);
         }
 
         private void Redo()
@@ -177,19 +167,19 @@ namespace S_Calc.Common.Controls.CustomKeyboard
                 input.SetSelection(CursorPosition);
                 if (success)
                 {
-                    output.Text = " = " + string.Copy(Result);
+                    output.Text =string.Copy(Result);
                 }
                 else
                 {
-                    output.Text = " = ";
+                    output.Text = string.Empty;
                 }
                 input.TextChanged += Input_TextChanged;
             }
             else
             {
-                Toast.MakeText(MainActivity.Instance, "Redo option does not available.", ToastLength.Long).Show();
+                Kernel.Activity.ShowMessage("Redo option does not available.");
             }
-            OnRelease(Keycode.Unknown);
+            OnRelease((Keycode)261);
         }
 
         private void ClearInput()
@@ -216,7 +206,7 @@ namespace S_Calc.Common.Controls.CustomKeyboard
             }
             else
             {
-                Toast.MakeText(MainActivity.Instance, "Paste option does not available.", ToastLength.Long).Show();
+                Kernel.Activity.ShowMessage("Paste option does not available.");
             }
             OnRelease(Keycode.Unknown);
         }
@@ -226,11 +216,11 @@ namespace S_Calc.Common.Controls.CustomKeyboard
             bool IsCopyAvailable = Controller.Copy(output.Text.Replace("=", string.Empty).Replace(" ", string.Empty));
             if (!IsCopyAvailable)
             {
-                Toast.MakeText(MainActivity.Instance, "Copy option does not available.", ToastLength.Long).Show();
+                Kernel.Activity.ShowMessage("Copy option does not available.");
             }
             else
             {
-                Toast.MakeText(MainActivity.Instance, "Result has been copied to clipboard.", ToastLength.Long).Show();
+                Kernel.Activity.ShowMessage("Result has been copied to clipboard.");
             }
             //OnRelease(Keycode.Unknown);
         }
@@ -242,7 +232,7 @@ namespace S_Calc.Common.Controls.CustomKeyboard
             {
                 input.SetSelection(--tmpi);
             }
-            OnRelease(Keycode.Unknown);
+            OnRelease((Keycode)1000);
         }
 
         private void CursorRight()
@@ -252,7 +242,7 @@ namespace S_Calc.Common.Controls.CustomKeyboard
             {
                 input.SetSelection(++tmpi);
             }
-            OnRelease(Keycode.Unknown);
+            OnRelease((Keycode)1001);
         }
 
         public void PutString(string s, int cursor_back)

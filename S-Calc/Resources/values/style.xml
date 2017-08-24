@@ -12,7 +12,6 @@
 
   <style name="grey_keyboard">
     <item name="android:keyTextSize">22dp</item>
-    <item name="android:textStyle">italic</item>
     <item name="android:keyBackground">@drawable/keybackground</item>
     <item name="android:keyTextColor">@color/keyboardLongButton</item>
   </style>

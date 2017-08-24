@@ -1,10 +1,10 @@
-using Android.InputMethodServices;
+using System;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Widget;
-using S_Calc.Core;
 using S_Calc.Common.Controls.CustomKeyboard;
+using System.Text;
 
 namespace S_Calc.Common.fragments
 {
@@ -13,8 +13,6 @@ namespace S_Calc.Common.fragments
         private EditText Input, Output;
         private View _view;
         private string input => Input.Text;
-
-        private FloatingActionButton fab;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -30,22 +28,39 @@ namespace S_Calc.Common.fragments
 
             Output = _view.FindViewById<EditText>(Resource.Id.OutputEditText);
 
-            Kernel.Keyboard.OnCustomKeyboardCreate(_view.FindViewById<CustomKeyboardView>(Resource.Id.keyboard_view));
+            Kernel.Keyboard.OnCustomKeyboardCreate(_view.FindViewById<RippleKeyboardView>(Resource.Id.keyboard_view));
             Kernel.Keyboard.RegisterEditText(Input, Output);
             //Input.TextChanged += Input_TextChanged;
             Input.RequestFocus();
 
-            fab = _view.FindViewById<FloatingActionButton>(Resource.Id.fab_equals);
-
-            fab.Click += (o, e) =>
+            _view.FindViewById<Button>(Resource.Id.but_equals).Click += (o, e) =>
             {
-                //if (lastRes)
-                //{
-                //    Input.Text = Output.Text.Replace(" = ", string.Empty);
-                //    Input.SetSelection(Input.Text.Length);
-                //}
+                if (Output.Text != string.Empty)
+                {
+                    AddCaclUnit(Output.Text);
+                }
             };
+
             return _view;
+        }
+
+        internal void AddCaclUnit(string functionText, int numberOfArguments = 0)
+        {
+            StringBuilder sb = new StringBuilder();
+            int cursPos = Input.SelectionStart + functionText.Length;
+            sb.Append(functionText);
+
+            if (numberOfArguments != 0)
+            {
+                sb.Append("(");
+                for (int i = 1; i < numberOfArguments; i++)
+                    sb.Append(",");
+                sb.Append(")");
+                cursPos ++;
+            }
+
+            Input.Text = Input.Text.Insert(Input.SelectionStart, sb.ToString());
+            Input.SetSelection(cursPos);
         }
 
         //bool lastRes;

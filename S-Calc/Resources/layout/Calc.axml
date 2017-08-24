@@ -6,35 +6,49 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/frameBackground">
-    <EditText
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/InputEditText"
-        android:textCursorDrawable="@xml/cursor"
-        android:backgroundTint="#356060"
-        android:layout_marginTop="10dip"
-        android:textSize="22sp"
-        android:textColor="@color/button_material_dark" />
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_equals"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_anchor="@id/InputEditText"
-        android:layout_margin="24dp"
-        android:src="@drawable/ic_rotate_90_degrees_ccw_black_24dp"
-        android:layout_alignParentRight="true" />
-    <EditText
-        android:inputType="none"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/OutputEditText"
-        android:layout_marginTop="10dip"
-        android:textSize="24sp"
-        android:editable="false"
-        android:textColor="#1C1C1C"
-        android:layout_below="@id/InputEditText" />
+        android:background="@color/frameBackground">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/InputEditText"
+            android:textCursorDrawable="@xml/cursor"
+            android:backgroundTint="#356060"
+            android:layout_marginTop="10dip"
+            android:textSize="22sp"
+            android:textColor="@color/button_material_dark" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/frameBackground">
+            <Button
+                android:id="@+id/but_equals"
+                android:layout_width="45dip"
+                android:layout_height="45dip"
+                android:layout_marginTop="6.5dip"
+                android:layout_marginLeft="5dip"
+                android:background="@color/keyboardLongButton"
+                android:text="="
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"/>
+            <EditText
+                android:inputType="none"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/OutputEditText"
+                android:layout_marginTop="10dip"
+                android:textSize="24sp"
+                android:editable="false"
+                android:textColor="#1C1C1C"
+                android:layout_below="@id/InputEditText" />
+        </LinearLayout>
+    </LinearLayout>
 <!--The Custom Keyboard-->
-    <com.controls.CustomKeyboardView
+    <com.controls.RippleKeyboardView
         android:id="@+id/keyboard_view"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -44,7 +58,6 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:visibility="gone"
-        app:font="@string/font_awake"
         style="@style/grey_keyboard"
         android:backgroundTint="@color/keyboardLongButton" />
 </RelativeLayout>
