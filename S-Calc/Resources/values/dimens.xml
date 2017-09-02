@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <!-- Padding width of functions sliding pannel button. -->
+  <dimen name="dragPanelButtonWidth">40dip</dimen>
+  <dimen name="dragPanelButtonHeight">85dip</dimen>
+  <dimen name="markerHeight">40dip</dimen>
+</resources>

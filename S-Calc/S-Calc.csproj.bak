@@ -16,7 +16,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -37,6 +37,8 @@
     <EnableLLVM>False</EnableLLVM>
     <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
     <EnableProguard>False</EnableProguard>
+    <AndroidSupportedAbis />
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -44,7 +46,7 @@
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
@@ -55,10 +57,6 @@
     <Reference Include="Mono.Android" />
     <Reference Include="Mono.Android.Export" />
     <Reference Include="mscorlib" />
-    <Reference Include="RPNClassLibraryCSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MathLib\RPNClassLibraryCSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -89,16 +87,39 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\CustomKeyboardView.cs" />
-    <Compile Include="Controls\MainActionBarDrawerToggle.cs" />
-    <Compile Include="KeyboardListener.cs" />
+    <Compile Include="Common\Controls\CustomKeyboard\CustomKeyboard.cs" />
+    <Compile Include="Common\Controls\CustomKeyboard\CustomKeyboardView.cs" />
+    <Compile Include="Common\Controls\CustomKeyboard\NumericKeyboard.cs" />
+    <Compile Include="Common\Controls\FrameWithDragPanelLayout.cs" />
+    <Compile Include="Common\Controls\MainActionBarDrawerToggle.cs" />
+    <Compile Include="Common\Controls\CustomKeyboard\KeyboardListener.cs" />
+    <Compile Include="Common\Controls\PagerSlidingTabs\CostumePagerAdapter.cs" />
+    <Compile Include="Common\Controls\PagerSlidingTabs\ICustomTabProvider.cs" />
+    <Compile Include="Common\Controls\PagerSlidingTabs\IOnTabReselectedListener.cs" />
+    <Compile Include="Common\Controls\PagerSlidingTabs\PagerSlidingTabStrip.cs" />
+    <Compile Include="Common\FontManager.cs" />
+    <Compile Include="Common\fragments\DragPanelFragment.cs" />
+    <Compile Include="Common\fragments\WorkflowFragment.cs" />
+    <Compile Include="Core\CalculationHistory.cs" />
+    <Compile Include="Core\Constant.cs" />
+    <Compile Include="Core\Controller.cs" />
+    <Compile Include="Core\Evaluator.cs" />
+    <Compile Include="Core\Extensions.cs" />
+    <Compile Include="Core\Function.cs" />
+    <Compile Include="Core\HistoryBuffer.cs" />
+    <Compile Include="Core\ICalculatorUnit.cs" />
+    <Compile Include="Core\MathematicalFunctions.cs" />
+    <Compile Include="Core\ObjectsStorage.cs" />
+    <Compile Include="Core\Token.cs" />
+    <Compile Include="Kernel.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="Resources\fragments\CalcFragment.cs" />
-    <Compile Include="Resources\fragments\InfoFragment.cs" />
+    <Compile Include="Common\fragments\CalcFragment.cs" />
+    <Compile Include="Common\fragments\InfoFragment.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\awakelight.ttf" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
@@ -114,6 +135,10 @@
     <AndroidResource Include="Resources\layout\Calc.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\DragPanel.axml" />
+    <AndroidResource Include="Resources\layout\Workflow.axml" />
+    <AndroidResource Include="Resources\layout\pager_item.axml" />
+    <AndroidResource Include="Resources\layout\psts_tab.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
@@ -284,6 +309,40 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_undo_white_24dp.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Packages\Math\RPNClassLibraryCSharp.dll" />
+    <AndroidResource Include="Resources\drawable\keybackground.xml" />
+    <AndroidResource Include="Resources\drawable\normal.xml" />
+    <AndroidResource Include="Resources\drawable\normal_func.xml" />
+    <AndroidResource Include="Resources\drawable\normal_long.xml" />
+    <AndroidResource Include="Resources\drawable\pressed.xml" />
+    <AndroidResource Include="Resources\drawable\pressed_func.xml" />
+    <AndroidResource Include="Resources\drawable\psts_background_tab.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_keyboard_arrow_left_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_keyboard_arrow_right_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_update_white_36dp.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_keyboard_arrow_left_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_keyboard_arrow_right_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_update_white_36dp.png" />
+    <AndroidResource Include="Resources\drawable-v21\psts_background_tab.xml" />
+    <AndroidResource Include="Resources\drawable-xhdpi\dragButton40.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\dragButton45.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_keyboard_arrow_left_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_keyboard_arrow_right_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_update_white_36dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\shadow.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_keyboard_arrow_left_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_keyboard_arrow_right_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_update_white_36dp.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_keyboard_arrow_left_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_keyboard_arrow_right_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_update_white_36dp.png" />
+    <AndroidResource Include="Resources\values\attrs.xml" />
+    <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidResource Include="Resources\values\dimens.xml" />
+    <AndroidResource Include="Resources\xml\popup.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

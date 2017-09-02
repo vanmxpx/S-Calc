@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
-  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-    <item name="colorPrimary">#F5F5F5</item>
-    <!--<item name="colorAccent">#FF4081</item>-->
+  <!--Action Bar-->
+  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"><!--Light-->
+    <item name="colorPrimary">#283339</item><!--#F5F5F5-->
     <item name="drawerArrowStyle">@style/MainArrowStyle</item>
   </style>
   <style name="MainArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
-    <item name="color">#1C1C1C</item>
+    <item name="color">@android:color/white</item><!--#1C1C1C-->
     <item name="spinBars">true</item>
   </style>
+
   <style name="grey_keyboard">
-    <item name="android:keyTextSize">30dp</item>
-    <item name="android:fontFamily">roboto</item>
+    <item name="android:keyTextSize">22dp</item>
     <item name="android:keyBackground">@drawable/keybackground</item>
-    <item name="android:keyTextColor">@android:color/white</item>
+    <item name="android:keyTextColor">@color/keyboardLongButton</item>
   </style>
 </resources>

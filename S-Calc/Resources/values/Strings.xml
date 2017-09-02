@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Hello">Hello World, Click Me!</string>
     <string name="ApplicationName">S-Calc</string>
     <string name="closeDrawer">S-Close</string>
     <string name="openDrawer">S-Open</string>
+
+    <!--Fonts-->
+    <string name="font_awake">awakelight</string>
+  
+    <!--Functions Types-->
+    <string-array name="func_types">
+      <item>Favorites</item>
+      <item>Trigonometric</item>
+      <item>Hyperbolic</item>
+      <item>Common</item>
+      <item>Special</item>
+      <item>Custom</item>
+    </string-array>
+  <!--Constants Types-->
+  <string-array name="const_types">
+    <item>Internal</item>
+    <item>Custom</item>
+  </string-array>
 </resources>

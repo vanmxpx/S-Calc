@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!--Ripple Keyboard-->
+  <declare-styleable name="RippleKeyboardView">
+    <attr name="rv_alpha" format="integer" />
+    <attr name="rv_framerate" format="integer"/>
+    <attr name="rv_rippleDuration" format="integer"/>
+    <attr name="rv_zoomDuration" format="integer" />
+    <attr name="rv_color" format="color" />
+    <attr name="rv_centered" format="boolean" />
+    <attr name="rv_type" format="enum">
+      <enum name="simpleRipple" value="0"/>
+      <enum name="doubleRipple" value="1"/>
+      <enum name="rectangle" value="2" />
+    </attr>
+    <attr name="rv_ripplePadding" format="dimension" />
+    <attr name="rv_zoom" format="boolean" />
+    <attr name="rv_zoomScale" format="float" />
+  </declare-styleable>
+  <!--Tabs-->
+    <declare-styleable name="PagerSlidingTabStrip">
+        <attr name="pstsIndicatorColor" format="color" />
+        <attr name="pstsSeparatorColor" format="color" />
+        <attr name="pstsDividerColor" format="color" />
+        <attr name="pstsDividerWidth" format="dimension" />
+        <attr name="pstsIndicatorHeight" format="dimension" />
+        <attr name="pstsSeparatorHeight" format="dimension" />
+        <attr name="pstsDividerPadding" format="dimension" />
+        <attr name="pstsTabPaddingLeftRight" format="dimension" />
+        <attr name="pstsScrollOffset" format="dimension" />
+        <attr name="pstsTabBackground" format="reference" />
+        <attr name="pstsShouldExpand" format="boolean" />
+        <attr name="pstsTextAllCaps" format="boolean" />
+        <attr name="pstsSeparatorOnTop" format="boolean" />
+        <attr name="pstsPaddingMiddle" format="boolean" />
+        <attr name="pstsTextColorSelected" format="color" />
+        <attr name="pstsTextAlpha" format="integer" />
+        <attr name="pstsTextStyle">
+            <flag name="normal" value="0x0" />
+            <flag name="bold" value="0x1" />
+            <flag name="italic" value="0x2" />
+        </attr>
+        <attr name="pstsTextSelectedStyle">
+            <flag name="normal" value="0x0" />
+            <flag name="bold" value="0x1" />
+            <flag name="italic" value="0x2" />
+        </attr>
+    </declare-styleable>
+
+  <!--Drag Panel-->
+  <declare-styleable name="FrameWithDragPanelLayout">
+    <attr name="willDrawShadow" format="boolean" />
+    <attr name="parallaxFactor" format="float" />
+    <attr name="panelPeekWidth" format="dimension" />
+    <attr name="panelPeekHeight" format="dimension" />
+    <attr name="markerHeight" format="dimension" />
+    <attr name="shadowDrawable" format="reference" />
+  </declare-styleable>
+
+</resources>

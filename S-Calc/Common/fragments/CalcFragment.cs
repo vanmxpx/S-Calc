@@ -1,8 +1,10 @@
+using System;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Widget;
-using RPNClassLibraryCSharp;
+using S_Calc.Common.Controls.CustomKeyboard;
+using System.Text;
 
 namespace S_Calc.Common.fragments
 {
@@ -11,8 +13,6 @@ namespace S_Calc.Common.fragments
         private EditText Input, Output;
         private View _view;
         private string input => Input.Text;
-
-        private FloatingActionButton fab;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -27,56 +27,78 @@ namespace S_Calc.Common.fragments
             Input.ShowSoftInputOnFocus = false;
 
             Output = _view.FindViewById<EditText>(Resource.Id.OutputEditText);
-            //Output.RequestFocus();
 
-            Kernel.Keyboard.RegisterEditText(Input);
-            Input.TextChanged += Input_TextChanged;
+            Kernel.Keyboard.OnCustomKeyboardCreate(_view.FindViewById<RippleKeyboardView>(Resource.Id.keyboard_view));
+            Kernel.Keyboard.RegisterEditText(Input, Output);
+            //Input.TextChanged += Input_TextChanged;
             Input.RequestFocus();
 
-            fab = _view.FindViewById<FloatingActionButton>(Resource.Id.fab_equals);
-
-            fab.Click += (o, e) =>
+            _view.FindViewById<Button>(Resource.Id.but_equals).Click += (o, e) =>
             {
-                if (lastRes)
+                if (Output.Text != string.Empty)
                 {
-                    Input.Text = Output.Text.Replace(" = ", string.Empty);
-                    Input.SetSelection(Input.Text.Length);
+                    AddCaclUnit(Output.Text);
                 }
             };
+
             return _view;
         }
 
-        bool lastRes;
-
-        private void Input_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
+        internal void AddCaclUnit(string functionText, int numberOfArguments = 0)
         {
-            fab.Alpha = input.Length > 22 ? 0.5f : 1;
-            string output;
-            bool succsess;
-            Controller.Evaluate(input, out output, out succsess);
+            StringBuilder sb = new StringBuilder();
+            int cursPos = Input.SelectionStart + functionText.Length;
+            sb.Append(functionText);
 
-            //TODO: Setup error handling
-            if (!succsess)
+            if (numberOfArguments != 0)
             {
-                if (lastRes && output != "Stack empty.")
-                {
-                    Snackbar.Make(_view, output, Snackbar.LengthLong)
-                        .SetAction("Undo", v =>
-                        {
-                            Kernel.Keyboard.Undo();
-                        })
-                        .Show();
-                    lastRes = false;
-                }
-                Output.Text = " =";
-
-            }
-            else
-            {
-                Output.Text = $" = {output}";
-                lastRes = true;
+                sb.Append("(");
+                for (int i = 1; i < numberOfArguments; i++)
+                    sb.Append(",");
+                sb.Append(")");
+                cursPos ++;
             }
 
+            Input.Text = Input.Text.Insert(Input.SelectionStart, sb.ToString());
+            Input.SetSelection(cursPos);
         }
+
+        //bool lastRes;
+
+        //private void Input_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
+        //{
+        //    if (input.Length == 0)
+        //    {
+        //        Output.Text = " =";
+        //        return;
+        //    }
+        //    fab.Alpha = input.Length > 22 ? 0.5f : 1;
+        //    string output;
+        //    bool succsess;
+        //    Controller.Evaluate(input, Input.SelectionStart, out output, out succsess);
+
+        //    //TODO: Setup error handling
+        //    if (!succsess)
+        //    {
+        //        //if (lastRes && output != "Stack empty.")
+        //        //{
+        //        //    Snackbar.Make(_view, output, Snackbar.LengthLong)
+        //        //        .SetAction("Undo", v =>
+        //        //        {
+        //        //            Kernel.Keyboard.Undo();
+        //        //        })
+        //        //        .Show();
+        //        //    lastRes = false;
+        //        //}
+        //        Output.Text = " =";
+
+        //    }
+        //    else
+        //    {
+        //        Output.Text = $" = {output}";
+        //        lastRes = true;
+        //    }
+
+        //}
     }
 }

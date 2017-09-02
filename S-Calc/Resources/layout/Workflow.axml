@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.controls.FrameWithDragPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/frameWithDragPanel"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    app:panelPeekWidth="@dimen/dragPanelButtonWidth"
+    app:panelPeekHeight="@dimen/dragPanelButtonHeight"
+    app:markerHeight="@dimen/markerHeight"
+    app:parallaxFactor="0.1"
+    app:willDrawShadow="false">
+<!--app:shadow_drawable="@drawable/shadow_np"-->
+<!-- Calculator fragment-->
+    <FrameLayout
+        android:id="@+id/calcContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+<!--Floating panel fragment-->
+    <FrameLayout
+        android:id="@+id/dragPanelContainer"
+        android:background="@android:color/transparent"
+        android:layout_gravity="center"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent" />
+</com.controls.FrameWithDragPanelLayout>
